@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Github, GraduationCap, Twitter, ChevronDown, ChevronUp, ExternalLink } from 'lucide-react';
+import { Mail, Github, Linkedin, GraduationCap, Twitter, ChevronDown, ChevronUp, ExternalLink } from 'lucide-react';
 import { portfolioData } from '../mock';
 
 const Home = () => {
@@ -50,6 +50,10 @@ const Home = () => {
               <a href={portfolioData.personal.github} target="_blank" rel="noopener noreferrer" className="hero-link">
                 <Github size={20} />
                 <span>GitHub</span>
+              </a>
+              <a href={portfolioData.personal.linkedin} target="_blank" rel="noopener noreferrer" className="hero-link">
+                <Linkedin size={20} />
+                <span>LinkedIn</span>
               </a>
               <a href={portfolioData.personal.scholar} target="_blank" rel="noopener noreferrer" className="hero-link">
                 <GraduationCap size={20} />
@@ -215,6 +219,10 @@ const Home = () => {
             <a href={portfolioData.personal.github} target="_blank" rel="noopener noreferrer" className="contact-link">
               <Github size={20} />
               {portfolioData.personal.github.replace('https://github.com/', '')}
+            </a>
+            <a href={portfolioData.personal.linkedin} target="_blank" rel="noopener noreferrer" className="contact-link">
+              <Linkedin size={20} />
+              {portfolioData.personal.linkedin.replace('https://www.linkedin.com/in/', '').replace(/\/$/, '')}
             </a>
             <a href={portfolioData.personal.scholar} target="_blank" rel="noopener noreferrer" className="contact-link">
               <GraduationCap size={20} />
