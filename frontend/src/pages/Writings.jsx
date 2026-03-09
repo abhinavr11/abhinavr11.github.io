@@ -26,96 +26,100 @@ const Writings = () => {
       </section>
 
       {/* Technical Writings */}
-      <section className="content-section">
-        <h2 className="section-title">Technical</h2>
-        <div className="section-content">
-          <div className="writings-grid">
-            {portfolioData.technicalWritings.map((writing) => (
-              writing.isPdf ? (
-                <a
-                  key={writing.id}
-                  href={writing.pdfUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="writing-card"
-                >
-                  <h3 className="writing-title">{writing.title}</h3>
-                  <p className="writing-excerpt">{writing.excerpt}</p>
-                  <div className="writing-meta">
-                    <span className="writing-date">{writing.date}</span>
-                    <span className="writing-time">
-                      <Clock size={14} />
-                      {writing.readTime}
-                    </span>
-                  </div>
-                </a>
-              ) : (
-                <Link 
-                  key={writing.id} 
-                  to={`/writing/${writing.id}`}
-                  className="writing-card"
-                >
-                  <h3 className="writing-title">{writing.title}</h3>
-                  <p className="writing-excerpt">{writing.excerpt}</p>
-                  <div className="writing-meta">
-                    <span className="writing-date">{writing.date}</span>
-                    <span className="writing-time">
-                      <Clock size={14} />
-                      {writing.readTime}
-                    </span>
-                  </div>
-                </Link>
-              )
-            ))}
+      {portfolioData.technicalWritings.length > 0 && (
+        <section className="content-section">
+          <h2 className="section-title">Technical</h2>
+          <div className="section-content">
+            <div className="writings-grid">
+              {portfolioData.technicalWritings.map((writing) => (
+                writing.isPdf ? (
+                  <a
+                    key={writing.id}
+                    href={writing.pdfUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="writing-card"
+                  >
+                    <h3 className="writing-title">{writing.title}</h3>
+                    <p className="writing-excerpt">{writing.excerpt}</p>
+                    <div className="writing-meta">
+                      <span className="writing-date">{writing.date}</span>
+                      <span className="writing-time">
+                        <Clock size={14} />
+                        {writing.readTime}
+                      </span>
+                    </div>
+                  </a>
+                ) : (
+                  <Link
+                    key={writing.id}
+                    to={`/writing/${writing.id}`}
+                    className="writing-card"
+                  >
+                    <h3 className="writing-title">{writing.title}</h3>
+                    <p className="writing-excerpt">{writing.excerpt}</p>
+                    <div className="writing-meta">
+                      <span className="writing-date">{writing.date}</span>
+                      <span className="writing-time">
+                        <Clock size={14} />
+                        {writing.readTime}
+                      </span>
+                    </div>
+                  </Link>
+                )
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Non-Technical Writings */}
-      <section className="content-section">
-        <h2 className="section-title">Non-Technical</h2>
-        <div className="section-content">
-          <div className="writings-grid">
-            {portfolioData.nonTechnicalWritings.map((writing) => (
-              writing.isPdf ? (
-                <a
-                  key={writing.id}
-                  href={writing.pdfUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="writing-card"
-                >
-                  <h3 className="writing-title">{writing.title}</h3>
-                  <p className="writing-excerpt">{writing.excerpt}</p>
-                  <div className="writing-meta">
-                    <span className="writing-date">{writing.date}</span>
-                    <span className="writing-time">
-                      <Clock size={14} />
-                      {writing.readTime}
-                    </span>
-                  </div>
-                </a>
-              ) : (
-                <Link 
-                  key={writing.id} 
-                  to={`/writing/${writing.id}`}
-                  className="writing-card"
-                >
-                  <h3 className="writing-title">{writing.title}</h3>
-                  <p className="writing-excerpt">{writing.excerpt}</p>
-                  <div className="writing-meta">
-                    <span className="writing-date">{writing.date}</span>
-                    <span className="writing-time">
-                      <Clock size={14} />
-                      {writing.readTime}
-                    </span>
-                  </div>
-                </Link>
-              )
-            ))}
+      {portfolioData.nonTechnicalWritings.length > 0 && (
+        <section className="content-section">
+          <h2 className="section-title">Non-Technical</h2>
+          <div className="section-content">
+            <div className="writings-grid">
+              {portfolioData.nonTechnicalWritings.map((writing) => (
+                writing.isPdf ? (
+                  <a
+                    key={writing.id}
+                    href={writing.pdfUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="writing-card"
+                  >
+                    <h3 className="writing-title">{writing.title}</h3>
+                    <p className="writing-excerpt">{writing.excerpt}</p>
+                    <div className="writing-meta">
+                      <span className="writing-date">{writing.date}</span>
+                      <span className="writing-time">
+                        <Clock size={14} />
+                        {writing.readTime}
+                      </span>
+                    </div>
+                  </a>
+                ) : (
+                  <Link
+                    key={writing.id}
+                    to={`/writing/${writing.id}`}
+                    className="writing-card"
+                  >
+                    <h3 className="writing-title">{writing.title}</h3>
+                    <p className="writing-excerpt">{writing.excerpt}</p>
+                    <div className="writing-meta">
+                      <span className="writing-date">{writing.date}</span>
+                      <span className="writing-time">
+                        <Clock size={14} />
+                        {writing.readTime}
+                      </span>
+                    </div>
+                  </Link>
+                )
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Footer */}
       <footer className="site-footer">

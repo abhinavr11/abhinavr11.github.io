@@ -174,74 +174,12 @@ export const portfolioData = {
       readTime: "Research Paper",
       isPdf: true,
       pdfUrl: `${publicUrl}/unconstrained_nonsmooth_nonconvex_convergence.pdf`
-    },
-    {
-      id: "tech1",
-      title: "Understanding Graph Neural Networks: A Mathematical Perspective",
-      date: "December 2024",
-      excerpt: "An in-depth exploration of the mathematical foundations underlying graph neural networks, including spectral graph theory and message passing frameworks.",
-      readTime: "15 min read"
     }
   ],
 
-  nonTechnicalWritings: [
-    {
-      id: "non1",
-      title: "The Art of Research: Lessons from My Undergraduate Journey",
-      date: "December 2024",
-      excerpt: "Reflections on navigating the world of academic research as an undergraduate student at IIT Bombay.",
-      readTime: "8 min read"
-    }
-  ],
+  nonTechnicalWritings: [],
 
   writingContent: {
-    tech1: {
-      title: "Understanding Graph Neural Networks: A Mathematical Perspective",
-      date: "December 2024",
-      content: `# Understanding Graph Neural Networks: A Mathematical Perspective
-
-## Introduction
-
-Graph Neural Networks (GNNs) have emerged as a powerful framework for learning on graph-structured data. In this article, we explore the mathematical foundations that make GNNs effective.
-
-## Spectral Graph Theory
-
-The foundation of many GNN architectures lies in spectral graph theory. Given a graph $G = (V, E)$ with adjacency matrix $A$, we define the graph Laplacian as:
-
-$$L = D - A$$
-
-where $D$ is the degree matrix. The normalized Laplacian is given by:
-
-$$\mathcal{L} = D^{-1/2}LD^{-1/2} = I - D^{-1/2}AD^{-1/2}$$
-
-## Message Passing Framework
-
-The core idea of GNNs is the message passing mechanism. For a node $v$ at layer $k$, the update rule can be written as:
-
-$$h_v^{(k+1)} = \sigma\left(W^{(k)} \sum_{u \in \mathcal{N}(v)} \frac{h_u^{(k)}}{\sqrt{d_u d_v}} + b^{(k)}\right)$$
-
-where $\mathcal{N}(v)$ represents the neighbors of node $v$, $d_v$ is the degree of node $v$, and $\sigma$ is an activation function.
-
-## Graph Convolutional Networks
-
-Graph Convolutional Networks (GCNs) apply the following layer-wise propagation rule:
-
-$$H^{(k+1)} = \sigma(\tilde{D}^{-1/2}\tilde{A}\tilde{D}^{-1/2}H^{(k)}W^{(k)})$$
-
-where $\tilde{A} = A + I$ includes self-loops, and $\tilde{D}$ is the corresponding degree matrix.
-
-## Convergence Properties
-
-An important consideration is the convergence behavior of GNNs. We can show that under certain conditions, the node embeddings converge to a stable representation:
-
-$$\lim_{k \to \infty} h_v^{(k)} = h_v^*$$
-
-This convergence is crucial for the expressiveness and stability of deep GNN architectures.
-
-## Conclusion
-
-Understanding the mathematical foundations of GNNs provides insights into their design and limitations. Future work should focus on addressing over-smoothing and improving the expressiveness of these models.`
-    },
     tech2: {
       title: "Optimization Algorithms for Large-Scale Systems",
       date: "November 2024",
@@ -284,35 +222,6 @@ where $w_{ij}$ are mixing weights between agents.
 ## Conclusion
 
 Efficient optimization algorithms are essential for scaling machine learning to real-world applications.`
-    },
-    non1: {
-      title: "The Art of Research: Lessons from My Undergraduate Journey",
-      date: "December 2024",
-      content: `# The Art of Research: Lessons from My Undergraduate Journey
-
-When I started my undergraduate studies at IIT Bombay, I had no idea what research really meant. Coming from a background focused on competitive exams and structured coursework, the open-ended nature of research was both exciting and terrifying.
-
-## Finding Your Direction
-
-The first and perhaps most important lesson I learned was that research is not about having all the answers—it's about asking the right questions. During my second year, I joined a project on reinforcement learning for spacecraft control. I spent weeks reading papers, trying to understand concepts that seemed impossibly complex.
-
-## Embracing Failure
-
-My early experiments failed. A lot. My first implementation of a PPO algorithm didn't converge. My second attempt was too slow. But each failure taught me something valuable. I learned to debug systematically, to question my assumptions, and to seek help when needed.
-
-## The Importance of Community
-
-One of the unexpected joys of research has been the community. Late-night discussions with lab mates, collaborative debugging sessions, and mentorship from senior researchers have shaped my journey as much as the actual research work.
-
-## Balancing Breadth and Depth
-
-Throughout my undergraduate years, I worked on projects spanning robotics, NLP, computer vision, and optimization. This breadth helped me develop a versatile toolkit, but it also taught me the importance of going deep in certain areas.
-
-## Looking Forward
-
-As I continue my research journey at TCS Research, I carry these lessons with me. Research is a marathon, not a sprint. It requires patience, curiosity, and resilience.
-
-To aspiring researchers: don't be afraid to start. Your first project doesn't have to be perfect. What matters is taking that first step and staying curious.`
     },
     non2: {
       title: "From Aerospace to Computer Science: A Branch Change Story",
