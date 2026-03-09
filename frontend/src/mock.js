@@ -34,14 +34,6 @@ export const portfolioData = {
       text: "Paper on gradient-based optimal function learning submitted to TMLR"
     },
     {
-      date: "December 2024",
-      text: "Started work on railway scheduling optimization at TCS Research"
-    },
-    {
-      date: "August 2024",
-      text: "Joined Data and Decision Sciences group at TCS Research"
-    },
-    {
       date: "May 2024",
       text: "Received Undergraduate Research Award for best undergraduate thesis"
     }
@@ -92,7 +84,7 @@ export const portfolioData = {
     {
       id: "pub5",
       title: "Quantized Stochastic Primal–Dual Methods for Distributed Optimization under Relaxed Global Geometry",
-      authors: "Abhinav Raghuvanshi et al.",
+      authors: "Abhinav Raghuvanshi*, Susmit Sarkar*, Kushal Chakrabarti, Mayank Baranwal",
       venue: "Under review in UAI 2026",
       year: "2026",
       description: "We study distributed optimization with stochastic gradients and finite-bit communication modeled by random (unbiased) quantization. We propose q-PDGD, a quantized stochastic primal–dual method, and analyze it under relaxed global geometry. Under restricted secant inequality (RSI), a constant step-size yields linear contraction to an explicit neighborhood determined by gradient noise.",
