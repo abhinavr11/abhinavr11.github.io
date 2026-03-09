@@ -84,9 +84,18 @@ export const portfolioData = {
       id: "pub1",
       title: "On a Gradient Approach to Optimal Function Learning via Chebyshev Centers",
       authors: "Abhinav Raghuvanshi, Mayank Baranwal, Debasish Chatterjee",
-      venue: "Under review in TMLR",
+      venue: "Accepted at TMLR",
       year: "2025",
       description: "Introduced gradOL++, a novel gradient-based approach to solve Chebyshev center problems for function learning. Demonstrated faster empirical performance compared to gradOL v1 and SIPAMPL. Performed formal convergence analysis showing enhanced stability and refined learning rate selection.",
+      links: [{ text: "OpenReview", url: "https://openreview.net/forum?id=lPZVsDhyj3" }]
+    },
+    {
+      id: "pub5",
+      title: "Quantized Stochastic Primal–Dual Methods for Distributed Optimization under Relaxed Global Geometry",
+      authors: "Abhinav Raghuvanshi et al.",
+      venue: "Under review in UAI 2026",
+      year: "2026",
+      description: "We study distributed optimization with stochastic gradients and finite-bit communication modeled by random (unbiased) quantization. We propose q-PDGD, a quantized stochastic primal–dual method, and analyze it under relaxed global geometry. Under restricted secant inequality (RSI), a constant step-size yields linear contraction to an explicit neighborhood determined by gradient noise.",
       links: []
     },
     {
@@ -122,7 +131,7 @@ export const portfolioData = {
     {
       id: "proj1",
       title: "Railway Scheduling Optimization System",
-      organization: "TCS Research",
+      organization: "Prof Baranwal's Research Group",
       duration: "Aug 2024 - Present",
       description: "Tackled NP-hard railway scheduling as multi-agent system with real-world constraints. Designed PRIORITY-Q algorithm with prioritized event queues and look-ahead planning. Achieved faster computation and lower delay costs than RL baselines on Indian Railways networks.",
       skills: ["Multi-agent Systems", "Optimization", "Graph Algorithms"]
@@ -130,7 +139,7 @@ export const portfolioData = {
     {
       id: "proj2",
       title: "STING: Spatial Transcriptomics Inference",
-      organization: "TCS Research",
+      organization: "Prof Baranwal's Research Group",
       duration: "Aug 2024 - Present",
       description: "Developed computational framework combining KimiaNet and GNNs for spatial gene expression inference. Modeled tissue architecture as nearest-neighbor graphs. Validated on public datasets with strong correlation coefficients.",
       skills: ["Graph Neural Networks", "Computer Vision", "Bioinformatics"]
