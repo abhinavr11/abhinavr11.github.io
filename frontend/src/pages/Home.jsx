@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Github, ChevronDown, ChevronUp, ExternalLink } from 'lucide-react';
+import { Mail, Github, GraduationCap, Twitter, ChevronDown, ChevronUp, ExternalLink } from 'lucide-react';
 import { portfolioData } from '../mock';
 
 const Home = () => {
@@ -50,6 +50,14 @@ const Home = () => {
               <a href={portfolioData.personal.github} target="_blank" rel="noopener noreferrer" className="hero-link">
                 <Github size={20} />
                 <span>GitHub</span>
+              </a>
+              <a href={portfolioData.personal.scholar} target="_blank" rel="noopener noreferrer" className="hero-link">
+                <GraduationCap size={20} />
+                <span>Google Scholar</span>
+              </a>
+              <a href={portfolioData.personal.x} target="_blank" rel="noopener noreferrer" className="hero-link">
+                <Twitter size={20} />
+                <span>X</span>
               </a>
             </div>
             <p className="hero-quote">"It's not who I am underneath but what I do that defines me"</p>
@@ -207,6 +215,14 @@ const Home = () => {
             <a href={portfolioData.personal.github} target="_blank" rel="noopener noreferrer" className="contact-link">
               <Github size={20} />
               {portfolioData.personal.github.replace('https://github.com/', '')}
+            </a>
+            <a href={portfolioData.personal.scholar} target="_blank" rel="noopener noreferrer" className="contact-link">
+              <GraduationCap size={20} />
+              Google Scholar
+            </a>
+            <a href={portfolioData.personal.x} target="_blank" rel="noopener noreferrer" className="contact-link">
+              <Twitter size={20} />
+              {portfolioData.personal.x.replace('https://x.com/', '@')}
             </a>
           </div>
           
