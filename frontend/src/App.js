@@ -18,11 +18,6 @@ const getBasename = () => {
     }
   }
 
-  if (window.location.hostname.endsWith('.github.io')) {
-    const pathParts = window.location.pathname.split('/').filter(Boolean);
-    return pathParts.length > 0 ? `/${pathParts[0]}` : '/';
-  }
-
   return '/';
 };
 
