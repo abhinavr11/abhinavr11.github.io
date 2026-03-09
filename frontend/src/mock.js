@@ -85,7 +85,7 @@ export const portfolioData = {
       id: "pub5",
       title: "Quantized Stochastic Primal–Dual Methods for Distributed Optimization under Relaxed Global Geometry",
       authors: "Abhinav Raghuvanshi*, Susmit Sarkar*, Kushal Chakrabarti, Mayank Baranwal",
-      venue: "Under review in UAI 2026",
+      venue: "Under review in UAI",
       year: "2026",
       description: "We study distributed optimization with stochastic gradients and finite-bit communication modeled by random (unbiased) quantization. We propose q-PDGD, a quantized stochastic primal–dual method, and analyze it under relaxed global geometry. Under restricted secant inequality (RSI), a constant step-size yields linear contraction to an explicit neighborhood determined by gradient noise.",
       links: []
