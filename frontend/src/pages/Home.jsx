@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Github, Linkedin, GraduationCap, Twitter, ChevronDown, ChevronUp, ExternalLink } from 'lucide-react';
 import { portfolioData } from '../mock';
@@ -6,6 +6,15 @@ import { portfolioData } from '../mock';
 const Home = () => {
   const [expandedPub, setExpandedPub] = useState(null);
   const [expandedProj, setExpandedProj] = useState(null);
+  const [mapRefreshToken, setMapRefreshToken] = useState(Date.now());
+  const pulseMapsId = (process.env.REACT_APP_PULSEMAPS_ID || '').trim();
+  const hasPulseMapsWidget = pulseMapsId.length > 0;
+  const pulseMapsWidgetWidth = 392;
+  const pulseMapsMapUrl = hasPulseMapsWidget ? `https://pulsemaps.com/maps/${encodeURIComponent(pulseMapsId)}/` : '';
+  const pulseMapsBaseMapUrl = `https://pulsemaps.com/data/maps/world-map3-${pulseMapsWidgetWidth}-94928E.png`;
+  const pulseMapsOverlayUrl = hasPulseMapsWidget
+    ? `https://pulsemaps.com/widget.png?id=${encodeURIComponent(pulseMapsId)}&c4=F26D5B&c5=F5F3F0&c6=9A9890&width=${pulseMapsWidgetWidth}&rand=${mapRefreshToken}`
+    : '';
 
   const togglePublication = (id) => {
     setExpandedPub(expandedPub === id ? null : id);
@@ -14,6 +23,27 @@ const Home = () => {
   const toggleProject = (id) => {
     setExpandedProj(expandedProj === id ? null : id);
   };
+
+  useEffect(() => {
+    if (!hasPulseMapsWidget) {
+      return;
+    }
+
+    const trackingPixel = new Image();
+    trackingPixel.src = `https://pulsemaps.com/index.php?_p=pageview&id=${encodeURIComponent(pulseMapsId)}&rand=${Date.now()}`;
+  }, [hasPulseMapsWidget, pulseMapsId]);
+
+  useEffect(() => {
+    if (!hasPulseMapsWidget) {
+      return undefined;
+    }
+
+    const refreshInterval = window.setInterval(() => {
+      setMapRefreshToken(Date.now());
+    }, 60000);
+
+    return () => window.clearInterval(refreshInterval);
+  }, [hasPulseMapsWidget]);
 
   return (
     <div className="portfolio-container">
@@ -247,6 +277,41 @@ const Home = () => {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Visitor Map Section */}
+      <section className="content-section visitor-map-section" id="visitor-map">
+        <h2 className="section-title">Visitor Map</h2>
+        <div className="section-content">
+          <p className="visitor-map-intro">A live snapshot of where visits are coming from around the world.</p>
+          {hasPulseMapsWidget ? (
+            <div className="visitor-map-frame">
+              <a
+                href={pulseMapsMapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="visitor-map-link"
+                aria-label="Open detailed PulseMaps view"
+              >
+                <div
+                  className="visitor-map-canvas"
+                  style={{ backgroundImage: `url(${pulseMapsBaseMapUrl})` }}
+                >
+                  <img
+                    src={pulseMapsOverlayUrl}
+                    alt="Live visitor dots on world map"
+                    className="visitor-map-overlay"
+                  />
+                </div>
+              </a>
+              <p className="visitor-map-caption">Updates roughly every minute.</p>
+            </div>
+          ) : (
+            <p className="visitor-map-placeholder">
+              Set <code>REACT_APP_PULSEMAPS_ID</code> to enable the live map widget.
+            </p>
+          )}
         </div>
       </section>
 
