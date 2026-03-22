@@ -274,7 +274,6 @@ const Home = () => {
       <section className="content-section visitor-map-section" id="visitor-map">
         <h2 className="section-title">Visitor Map</h2>
         <div className="section-content">
-          <p className="visitor-map-intro">A live snapshot of where visits are coming from around the world.</p>
           <div className="visitor-map-frame visitor-map-globe-frame">
             <div id="visitor-map-globe-host" className="visitor-map-globe-host" aria-label="Live visitor globe"></div>
             <p className="visitor-map-caption">Powered by MapMyVisitors.</p>

@@ -785,11 +785,6 @@ a {
   max-width: 620px;
 }
 
-.visitor-map-intro {
-  color: var(--color-text-secondary);
-  margin-bottom: var(--spacing-sm);
-}
-
 .visitor-map-frame {
   border: 1px solid var(--color-border);
   background: linear-gradient(180deg, rgba(26, 26, 26, 0.85) 0%, rgba(10, 10, 10, 0.95) 100%);
@@ -806,11 +801,14 @@ a {
   justify-content: center;
   align-items: flex-start;
   width: 100%;
+  max-width: 300px;
   margin: 0 auto;
   min-height: 230px;
 }
 
 .visitor-map-globe-host .mmvst_outer {
+  width: 260px !important;
+  max-width: 260px;
   margin: 0 auto !important;
 }
 
