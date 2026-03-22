@@ -82,7 +82,10 @@ export const portfolioData = {
       venue: "Accepted at TMLR",
       year: "2025",
       description: "Introduced gradOL++, a novel gradient-based approach to solve Chebyshev center problems for function learning. Demonstrated faster empirical performance compared to gradOL v1 and SIPAMPL. Performed formal convergence analysis showing enhanced stability and refined learning rate selection.",
-      links: [{ text: "OpenReview", url: "https://openreview.net/forum?id=lPZVsDhyj3" }]
+      links: [
+        { text: "OpenReview", url: "https://openreview.net/forum?id=lPZVsDhyj3" },
+        { text: "Website", url: "https://gradol.in" }
+      ]
     },
     {
       id: "pub5",
