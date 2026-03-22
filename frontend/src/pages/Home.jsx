@@ -6,7 +6,7 @@ import { portfolioData } from '../mock';
 const Home = () => {
   const [expandedPub, setExpandedPub] = useState(null);
   const [expandedProj, setExpandedProj] = useState(null);
-  const mapMyVisitorsGlobeSrc = "https://mapmyvisitors.com/globe.js?d=E8O3uZDw2hhBi-4_3bMg6PX8HHdXXj1AUtQ0iuXo1EU";
+  const mapMyVisitorsWidgetSrc = "https://mapmyvisitors.com/map.js?cl=080808&w=500&t=tt&d=p_b13DPH_wIlvxdVFxRPKMWjiEVy4WhzWTl6AU8htFI&co=ffffff&cmo=3acc3a&cmn=ff5353&ct=808080";
 
   const togglePublication = (id) => {
     setExpandedPub(expandedPub === id ? null : id);
@@ -26,14 +26,14 @@ const Home = () => {
 
     const globeScript = document.createElement("script");
     globeScript.type = "text/javascript";
-    globeScript.id = "mmvst_globe";
-    globeScript.src = mapMyVisitorsGlobeSrc;
+    globeScript.id = "mapmyvisitors";
+    globeScript.src = mapMyVisitorsWidgetSrc;
     globeHost.appendChild(globeScript);
 
     return () => {
       globeHost.innerHTML = "";
     };
-  }, [mapMyVisitorsGlobeSrc]);
+  }, [mapMyVisitorsWidgetSrc]);
 
   return (
     <div className="portfolio-container">
