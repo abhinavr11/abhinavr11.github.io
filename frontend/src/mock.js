@@ -5,14 +5,14 @@ const publicUrl = process.env.PUBLIC_URL && process.env.PUBLIC_URL !== '.'
 export const portfolioData = {
   personal: {
     name: "Abhinav Raghuvanshi",
-    title: "Researcher & Engineer",
-    location: "Thane, Maharashtra",
+    title: "Nobody",
+    location: "Mumbai, Maharashtra",
     email: "abhinav.raghuvanshi2.ar@gmail.com",
     github: "https://github.com/abhinavr11",
     linkedin: "https://www.linkedin.com/in/abhinavr11/",
     scholar: "https://scholar.google.com/citations?hl=en&user=iF4H3-EAAAAJ",
     x: "https://x.com/abhinxvr",
-    bio: "I am a researcher, working at the intersection of optimization, machine learning, and graph neural networks. I completed my B.Tech in Aerospace Engineering with a Minor in Computer Science from IIT Bombay. My research focuses on developing scalable algorithms for complex real-world problems, from railway scheduling to spatial transcriptomics."
+    bio: "I work at the intersection of machine learning, controls, optimization and reinforcement learning. I completed my B.Tech in Aerospace Engineering with a Minor in Computer Science from IIT Bombay. I like rockets and robots but more importantly I like solving hard problems."
   },
   
   education: [

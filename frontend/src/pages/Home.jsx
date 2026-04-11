@@ -84,7 +84,10 @@ const Home = () => {
                 <span>X</span>
               </a>
             </div>
-            <p className="hero-quote">"It's not who I am underneath but what I do that defines me"</p>
+            <blockquote className="hero-quote">
+              <span>"Only by being able to endure what people cannot bear, can you do what people cannot do."</span>
+              <cite className="hero-quote-author">— John D. Rockefeller's Letter to His Son</cite>
+            </blockquote>
           </div>
         </div>
       </section>
