@@ -76,7 +76,7 @@ const Writings = () => {
       {/* Non-Technical Writings */}
       {portfolioData.nonTechnicalWritings.length > 0 && (
         <section className="content-section">
-          <h2 className="section-title">Non-Technical</h2>
+          <h2 className="section-title">Non Technical Articles</h2>
           <div className="section-content">
             <div className="writings-grid">
               {portfolioData.nonTechnicalWritings.map((writing) => (

@@ -180,7 +180,18 @@ export const portfolioData = {
     }
   ],
 
-  nonTechnicalWritings: [],
+ 
+  nonTechnicalWritings: [
+    {
+      id: "ack",
+      title: "Acknowledgements",
+      date: "April 2026",
+      excerpt: "Something I wrote in March, 2024",
+      readTime: "2 min read",
+      isPdf: false
+    }
+  ],
+
 
   writingContent: {
     tech2: {
@@ -226,34 +237,15 @@ where $w_{ij}$ are mixing weights between agents.
 
 Efficient optimization algorithms are essential for scaling machine learning to real-world applications.`
     },
-    non2: {
-      title: "From Aerospace to Computer Science: A Branch Change Story",
-      date: "September 2024",
-      content: `# From Aerospace to Computer Science: A Branch Change Story
 
-When I entered IIT Bombay in 2020 with an Aerospace Engineering seat, I wasn't entirely sure what aerospace engineering entailed. Like many students, I had chosen based on JEE rank and perceived prestige rather than genuine interest.
+ack: {
+      title: "Gratitude to the people whom I owe everyhting",
+      date: "April 2026",
+      content: `I would like to begin by offering my sincere gratitude to both of my supervisors Prof. Mayank Baranwal and Prof. Debasish Chatterjee for the time they spent on helping me with the problems. I like being in rooms where everyone is smarter than me because that's when one gets to learn the most, and emerging from the quiet intensity of those meetings, I carry forward a brilliance borrowed from the generous wells of their intellect. They were appreciative when they saw my efforts but more importantly they sat down to debug like a true engineer, thinking problems through with me and sketching a path to solution speaks volume about them.
 
-## The Realization
+I would also like to dedicate the work to my family and all of my friends at IITB, without whom there is no light even on the brightest day. I would like to extend special thanks to my friends Anirudh, Siddhesh, Kaustubh, Kushal, Lakshya, Saurabh, Akshat and Pranav for making me realise that some things in life are more important than others.
 
-My first semester exposed me to the beauty of mathematics and programming. I found myself spending more time on CS assignments than on aerospace courses. I was fascinated by algorithms, machine learning, and the endless possibilities of software.
-
-## The Decision
-
-Branch change at IIT Bombay is highly competitive—only the top 5-6% of students can switch branches. The decision to pursue it wasn't easy. It meant doubling down on academics during my first year, sacrificing social activities and personal projects.
-
-## The Journey
-
-I spent that year learning not just for exams, but for understanding. I attended extra lectures, solved additional problems, and sought help from seniors. The pressure was intense, but it was driven by a clear goal: to study what I truly loved.
-
-## The Outcome
-
-When the results came out, I was among the 120 students who secured a branch change. Moving to Computer Science felt like coming home. Suddenly, every course was exciting. Every project was an opportunity to learn something I genuinely cared about.
-
-## Reflections
-
-Looking back, I'm grateful for the experience. It taught me about determination, goal-setting, and the importance of pursuing your passion. My aerospace background also gave me a unique perspective in CS—systems thinking, mathematical rigor, and problem-solving skills that continue to serve me well.
-
-To students considering branch change: if you're genuinely passionate about a different field, go for it. The effort is worth it.`
+Life has been good in the beautiful city of Mumbai, as I write this I don't know where the next phase of my life would be, but I hope it is filled with highs and lows and everything that makes me feel alive, and everything I could one day look back to with a smile.`
     }
   },
 
