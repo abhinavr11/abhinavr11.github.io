@@ -246,7 +246,7 @@ ack: {
 I would also like to dedicate the work to my family and all of my friends at IITB, without whom there is no light even on the brightest day. I would like to extend special thanks to my friends Anirudh, Siddhesh, Kaustubh, Kushal, Lakshya, Saurabh, Akshat and Pranav for making me realise that some things in life are more important than others.
 
 Life has been good in the beautiful city of Mumbai, as I write this I don't know where the next phase of my life would be, but I hope it is filled with highs and lows and everything that makes me feel alive, and everything I could one day look back to with a smile.`
-    }
+    },
   },
 
   skills: {

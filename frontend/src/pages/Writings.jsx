@@ -21,7 +21,7 @@ const Writings = () => {
       <section className="hero-section writings-hero">
         <div className="hero-content">
           <h1 className="hero-title">Writings</h1>
-          <p className="hero-subtitle">Thoughts on research, technology, and life</p>
+          <p className="hero-subtitle">I write what comes to my mind. I sincerely apologise if for any factual error I make in any of my writings. Please accept my apologies for any unkownigly caused inconvience for whatever reason.</p>
         </div>
       </section>
 
