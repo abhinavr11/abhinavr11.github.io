@@ -61,11 +61,7 @@ const Home = () => {
           </div>
           <div className="hero-text">
             <h1 className="hero-title">{portfolioData.personal.name}</h1>
-            <p className="hero-subtitle">
-              {portfolioData.personal.title}
-              <br />
-              A student of exacting inquiry and deliberate craft, devoted to building intelligent systems with rigor, restraint, and enduring purpose.
-            </p>
+            <p className="hero-subtitle">{portfolioData.personal.title}</p>
             <div className="hero-links">
               <a href={`mailto:${portfolioData.personal.email}`} className="hero-link">
                 <Mail size={20} />
