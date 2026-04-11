@@ -25,13 +25,13 @@ const Writings = () => {
         </div>
       </section>
 
-      {/* Technical Writings */}
-      {portfolioData.technicalWritings.length > 0 && (
+      {/* Non-Technical Writings */}
+      {portfolioData.nonTechnicalWritings.length > 0 && (
         <section className="content-section">
-          <h2 className="section-title">Technical</h2>
+          <h2 className="section-title">Non Technical Articles</h2>
           <div className="section-content">
             <div className="writings-grid">
-              {portfolioData.technicalWritings.map((writing) => (
+              {portfolioData.nonTechnicalWritings.map((writing) => (
                 writing.isPdf ? (
                   <a
                     key={writing.id}
@@ -73,13 +73,13 @@ const Writings = () => {
         </section>
       )}
 
-      {/* Non-Technical Writings */}
-      {portfolioData.nonTechnicalWritings.length > 0 && (
+      {/* Technical Writings */}
+      {portfolioData.technicalWritings.length > 0 && (
         <section className="content-section">
-          <h2 className="section-title">Non Technical Articles</h2>
+          <h2 className="section-title">Technical</h2>
           <div className="section-content">
             <div className="writings-grid">
-              {portfolioData.nonTechnicalWritings.map((writing) => (
+              {portfolioData.technicalWritings.map((writing) => (
                 writing.isPdf ? (
                   <a
                     key={writing.id}
