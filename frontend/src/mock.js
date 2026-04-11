@@ -99,7 +99,7 @@ export const portfolioData = {
     {
       id: "pub6",
       title: "Quantized Stochastic Primal–Dual Method for Distributed Optimization under Restricted Secant Inequality",
-      authors: "Abhinav Raghuvanshi, Susmit Sarkar, Kushal Chakrabarti, Mayank Baranwal",
+      authors: "Abhinav Raghuvanshi*, Susmit Sarkar*, Kushal Chakrabarti, Mayank Baranwal",
       venue: "Under review in CDC",
       year: "2026",
       description: "We investigate networked stochastic optimization in the presence of communication constraints, modeling finite-precision message passing through unbiased random quantization. We develop q-PDGD, a quantized stochastic primal-dual scheme, and prove convergence under the restricted secant inequality (RSI), without imposing any shared-solution requirement across agents. Our results show that a constant stepsize delivers geometric decay to a computable error neighborhood whose size reflects stochastic gradient noise, quantization effects, and spectral properties of the communication graph, while a diminishing stepsize yields an O(1/k) convergence rate. Up to network- and compression-dependent terms, the resulting oracle complexity aligns with the strongest known rates for centralized stochastic optimization. Experimental results support the analysis and demonstrate the interplay between communication precision, stepsize design, and topology.",
