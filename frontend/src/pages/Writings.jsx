@@ -1,9 +1,49 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Clock } from 'lucide-react';
 import { portfolioData } from '../mock';
+import { loadWritings } from '../lib/writings';
 
 const Writings = () => {
+  const [writings, setWritings] = useState({
+    technicalWritings: [],
+    nonTechnicalWritings: []
+  });
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    let mounted = true;
+
+    const fetchWritings = async () => {
+      try {
+        const data = await loadWritings();
+        if (mounted) {
+          setWritings({
+            technicalWritings: data.technicalWritings,
+            nonTechnicalWritings: data.nonTechnicalWritings
+          });
+          setError('');
+        }
+      } catch (fetchError) {
+        if (mounted) {
+          setError('Unable to load writings right now.');
+        }
+      } finally {
+        if (mounted) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    fetchWritings();
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  const { technicalWritings, nonTechnicalWritings } = writings;
+
   return (
     <div className="portfolio-container">
       {/* Header */}
@@ -25,17 +65,33 @@ const Writings = () => {
         </div>
       </section>
 
+      {isLoading && (
+        <section className="content-section">
+          <div className="section-content">
+            <p>Loading writings...</p>
+          </div>
+        </section>
+      )}
+
+      {error && (
+        <section className="content-section">
+          <div className="section-content">
+            <p>{error}</p>
+          </div>
+        </section>
+      )}
+
       {/* Non-Technical Writings */}
-      {portfolioData.nonTechnicalWritings.length > 0 && (
+      {!isLoading && nonTechnicalWritings.length > 0 && (
         <section className="content-section">
           <h2 className="section-title">Non Technical Articles</h2>
           <div className="section-content">
             <div className="writings-grid">
-              {portfolioData.nonTechnicalWritings.map((writing) => (
-                writing.isPdf ? (
+              {nonTechnicalWritings.map((writing) => (
+                writing.externalUrl ? (
                   <a
                     key={writing.id}
-                    href={writing.pdfUrl}
+                    href={writing.externalUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="writing-card"
@@ -74,16 +130,16 @@ const Writings = () => {
       )}
 
       {/* Technical Writings */}
-      {portfolioData.technicalWritings.length > 0 && (
+      {!isLoading && technicalWritings.length > 0 && (
         <section className="content-section">
           <h2 className="section-title">Technical</h2>
           <div className="section-content">
             <div className="writings-grid">
-              {portfolioData.technicalWritings.map((writing) => (
-                writing.isPdf ? (
+              {technicalWritings.map((writing) => (
+                writing.externalUrl ? (
                   <a
                     key={writing.id}
-                    href={writing.pdfUrl}
+                    href={writing.externalUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="writing-card"

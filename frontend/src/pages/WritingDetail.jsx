@@ -1,14 +1,54 @@
-import React, { useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { portfolioData } from '../mock';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
+import { loadWritings } from '../lib/writings';
 
 const WritingDetail = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
-  const content = portfolioData.writingContent[id];
+  const [content, setContent] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    let mounted = true;
+
+    const fetchContent = async () => {
+      try {
+        const data = await loadWritings();
+        if (!mounted) return;
+
+        const writing = data.writingById[id];
+        if (!writing) {
+          setContent(null);
+          return;
+        }
+
+        if (writing.externalUrl) {
+          window.location.assign(writing.externalUrl);
+          return;
+        }
+
+        setContent(writing);
+        setError('');
+      } catch (loadError) {
+        if (mounted) {
+          setError('Unable to load this writing right now.');
+        }
+      } finally {
+        if (mounted) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    fetchContent();
+    return () => {
+      mounted = false;
+    };
+  }, [id]);
 
   useEffect(() => {
     if (content) {
@@ -129,6 +169,47 @@ const WritingDetail = () => {
     flushParagraph();
     return elements;
   };
+
+  if (isLoading) {
+    return (
+      <div className="portfolio-container">
+        <header className="site-header">
+          <div className="header-content">
+            <Link to="/writings" className="back-link">
+              <ArrowLeft size={20} />
+              <span>Back to Writings</span>
+            </Link>
+          </div>
+        </header>
+        <section className="content-section">
+          <div className="section-content">
+            <p>Loading writing...</p>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="portfolio-container">
+        <header className="site-header">
+          <div className="header-content">
+            <Link to="/writings" className="back-link">
+              <ArrowLeft size={20} />
+              <span>Back to Writings</span>
+            </Link>
+          </div>
+        </header>
+        <section className="content-section">
+          <div className="section-content">
+            <h2>Could not load writing</h2>
+            <p>{error}</p>
+          </div>
+        </section>
+      </div>
+    );
+  }
 
   if (!content) {
     return (
