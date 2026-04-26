@@ -7,7 +7,8 @@ import 'katex/dist/katex.min.css';
 import { loadWritings } from '../lib/writings';
 
 const WritingDetail = () => {
-  const { id } = useParams();
+  const { slug, id } = useParams();
+  const lookupKey = slug || id;
   const [content, setContent] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
@@ -20,7 +21,7 @@ const WritingDetail = () => {
         const data = await loadWritings();
         if (!mounted) return;
 
-        const writing = data.writingById[id];
+        const writing = data.writingBySlug[lookupKey] || data.writingById[lookupKey];
         if (!writing) {
           setContent(null);
           return;
@@ -48,7 +49,7 @@ const WritingDetail = () => {
     return () => {
       mounted = false;
     };
-  }, [id]);
+  }, [lookupKey]);
 
   useEffect(() => {
     if (content) {

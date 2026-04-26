@@ -55,11 +55,12 @@ const parseWritingFile = async (modulePath, category) => {
 
   const rawMarkdown = await response.text();
   const { metadata, content } = parseFrontmatter(rawMarkdown);
-  const fallbackId = modulePath.split('/').pop()?.replace(/\.md$/, '') || '';
+  const fileSlug = modulePath.split('/').pop()?.replace(/\.md$/, '') || '';
 
   const writing = {
-    id: metadata.id || fallbackId,
-    title: metadata.title || fallbackId,
+    id: metadata.id || fileSlug,
+    slug: fileSlug,
+    title: metadata.title || fileSlug,
     date: metadata.date || '',
     excerpt: metadata.excerpt || '',
     readTime: metadata.readTime || '',
@@ -94,6 +95,11 @@ export const loadWritings = async () => {
   ]);
 
   const allWritings = [...technicalWritings, ...nonTechnicalWritings];
+  const writingBySlug = allWritings.reduce((acc, writing) => {
+    acc[writing.slug] = writing;
+    return acc;
+  }, {});
+
   const writingById = allWritings.reduce((acc, writing) => {
     acc[writing.id] = writing;
     return acc;
@@ -102,6 +108,7 @@ export const loadWritings = async () => {
   return {
     technicalWritings,
     nonTechnicalWritings,
+    writingBySlug,
     writingById
   };
 };

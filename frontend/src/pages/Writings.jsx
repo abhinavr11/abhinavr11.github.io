@@ -109,7 +109,7 @@ const Writings = () => {
                 ) : (
                   <Link
                     key={writing.id}
-                    to={`/writing/${writing.id}`}
+                    to={`/writings/${writing.slug}.html`}
                     className="writing-card"
                   >
                     <h3 className="writing-title">{writing.title}</h3>
@@ -157,7 +157,7 @@ const Writings = () => {
                 ) : (
                   <Link
                     key={writing.id}
-                    to={`/writing/${writing.id}`}
+                    to={`/writings/${writing.slug}.html`}
                     className="writing-card"
                   >
                     <h3 className="writing-title">{writing.title}</h3>

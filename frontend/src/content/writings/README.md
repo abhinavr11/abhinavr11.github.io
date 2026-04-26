@@ -5,11 +5,11 @@ Create one markdown file per article in one of these folders:
 - `technical/`
 - `non-technical/`
 
-Each file must include frontmatter at the top:
+Each file should include frontmatter at the top:
 
 ```md
 ---
-id: unique-article-id
+id: optional-article-id
 title: Article title
 date: April 2026
 excerpt: One-line card summary
@@ -27,6 +27,8 @@ externalUrl: /your-file.pdf
 
 Notes:
 
-- `id` is used in the route `/writing/:id`.
+- URL is generated from the markdown filename:
+  - `my-article.md` -> `/writings/my-article.html`
+- `id` is optional and only used as internal metadata.
 - `title`, `date`, `excerpt`, and `readTime` are used in article cards.
 - `externalUrl` entries open directly and skip the detail page.
