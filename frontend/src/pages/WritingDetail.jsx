@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { portfolioData } from '../mock';
 import katex from 'katex';
@@ -8,7 +8,9 @@ import { loadWritings } from '../lib/writings';
 
 const WritingDetail = () => {
   const { slug, id } = useParams();
+  const navigate = useNavigate();
   const lookupKey = slug || id;
+  const cleanLookupKey = lookupKey?.replace(/\.[a-f0-9]{8,}$/i, '');
   const [content, setContent] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
@@ -21,10 +23,17 @@ const WritingDetail = () => {
         const data = await loadWritings();
         if (!mounted) return;
 
-        const writing = data.writingBySlug[lookupKey] || data.writingById[lookupKey];
+        const writing = data.writingBySlug[lookupKey]
+          || data.writingById[lookupKey]
+          || data.writingBySlug[cleanLookupKey]
+          || data.writingById[cleanLookupKey];
         if (!writing) {
           setContent(null);
           return;
+        }
+
+        if (slug && lookupKey !== writing.slug) {
+          navigate(`/writings/${writing.slug}.html`, { replace: true });
         }
 
         if (writing.externalUrl) {
@@ -49,7 +58,7 @@ const WritingDetail = () => {
     return () => {
       mounted = false;
     };
-  }, [lookupKey]);
+  }, [lookupKey, cleanLookupKey, navigate, slug]);
 
   useEffect(() => {
     if (content) {

@@ -47,7 +47,7 @@ const parseComparableDate = (value) => {
   return Number.isNaN(timestamp) ? 0 : timestamp;
 };
 
-const parseWritingFile = async (modulePath, category) => {
+const parseWritingFile = async (modulePath, sourceKey, category) => {
   const response = await fetch(modulePath);
   if (!response.ok) {
     throw new Error(`Failed to load writing file: ${modulePath}`);
@@ -55,7 +55,7 @@ const parseWritingFile = async (modulePath, category) => {
 
   const rawMarkdown = await response.text();
   const { metadata, content } = parseFrontmatter(rawMarkdown);
-  const fileSlug = modulePath.split('/').pop()?.replace(/\.md$/, '') || '';
+  const fileSlug = sourceKey.split('/').pop()?.replace(/\.md$/, '') || '';
 
   const writing = {
     id: metadata.id || fileSlug,
@@ -78,7 +78,7 @@ const loadCategory = async (context, category) => {
   const writings = await Promise.all(
     keys.map(async (key) => {
       const modulePath = context(key);
-      return parseWritingFile(modulePath, category);
+      return parseWritingFile(modulePath, key, category);
     })
   );
 
