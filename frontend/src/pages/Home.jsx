@@ -74,28 +74,6 @@ const Home = () => {
           <div className="hero-text">
             <h1 className="hero-title">{portfolioData.personal.name}</h1>
             <p className="hero-subtitle">{portfolioData.personal.title}</p>
-            <div className="hero-links">
-              <a href={`mailto:${portfolioData.personal.email}`} className="hero-link">
-                <Mail size={20} />
-                <span>Email</span>
-              </a>
-              <a href={portfolioData.personal.github} target="_blank" rel="noopener noreferrer" className="hero-link">
-                <Github size={20} />
-                <span>GitHub</span>
-              </a>
-              <a href={portfolioData.personal.linkedin} target="_blank" rel="noopener noreferrer" className="hero-link">
-                <Linkedin size={20} />
-                <span>LinkedIn</span>
-              </a>
-              <a href={portfolioData.personal.scholar} target="_blank" rel="noopener noreferrer" className="hero-link">
-                <GraduationCap size={20} />
-                <span>Google Scholar</span>
-              </a>
-              <a href={portfolioData.personal.x} target="_blank" rel="noopener noreferrer" className="hero-link">
-                <Twitter size={20} />
-                <span>X</span>
-              </a>
-            </div>
             <blockquote className="hero-quote">
               <span>"Only by being able to endure what people cannot bear, can you do what people cannot do."</span>
               <cite className="hero-quote-author">— John D. Rockefeller's Letter to His Son</cite>
