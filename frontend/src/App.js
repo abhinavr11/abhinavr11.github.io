@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Writings from './pages/Writings';
 import WritingDetail from './pages/WritingDetail';
 import Miscellaneous from './pages/Miscellaneous';
+import MiscellaneousDetail from './pages/MiscellaneousDetail';
 import './styles/portfolio.css';
 
 const getBasename = () => {
@@ -31,6 +32,8 @@ function App() {
           <Route path="/writings/:slug.html" element={<WritingDetail />} />
           <Route path="/writing/:id" element={<WritingDetail />} />
           <Route path="/miscellaneous" element={<Miscellaneous />} />
+          <Route path="/miscellaneous/:slug.html" element={<MiscellaneousDetail />} />
+          <Route path="/miscellaneous/topic/:id" element={<MiscellaneousDetail />} />
         </Routes>
       </BrowserRouter>
     </div>

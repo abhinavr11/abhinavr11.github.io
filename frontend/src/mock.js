@@ -12,7 +12,7 @@ export const portfolioData = {
     linkedin: "https://www.linkedin.com/in/abhinavr11/",
     scholar: "https://scholar.google.com/citations?hl=en&user=iF4H3-EAAAAJ",
     x: "https://x.com/abhinav_r11",
-    bio: "I am an incoming MS student in Computational Systems Engineering at at Carnegie Mellon University. I work at the intersection of machine learning, controls, optimization and reinforcement learning. I completed my B.Tech in Aerospace Engineering with a Minor in Computer Science from IIT Bombay. I like rockets and robots but more importantly I like solving hard problems."
+    bio: "I am an incoming MS student in Computational Systems Engineering at Carnegie Mellon University. I work at the intersection of machine learning, controls, optimization and reinforcement learning. I completed my B.Tech in Aerospace Engineering with a Minor in Computer Science from IIT Bombay. I like rockets and robots but more importantly I like solving hard problems."
   },
   
   education: [
@@ -135,14 +135,6 @@ export const portfolioData = {
   ],
 
   projects: [
-    {
-      id: "proj1",
-      title: "Railway Scheduling Optimization System",
-      organization: "Prof Baranwal's Research Group",
-      duration: "Aug 2024 - Present",
-      description: "Tackled NP-hard railway scheduling as multi-agent system with real-world constraints. Designed PRIORITY-Q algorithm with prioritized event queues and look-ahead planning. Achieved faster computation and lower delay costs than RL baselines on Indian Railways networks.",
-      skills: ["Multi-agent Systems", "Optimization", "Graph Algorithms"]
-    },
     {
       id: "proj2",
       title: "STING: Spatial Transcriptomics Inference",

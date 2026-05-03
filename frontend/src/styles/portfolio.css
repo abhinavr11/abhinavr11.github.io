@@ -798,6 +798,68 @@ a {
   line-height: 1.9;
 }
 
+.misc-html-content > * + * {
+  margin-top: var(--spacing-md);
+}
+
+.misc-html-content h1,
+.misc-html-content h2,
+.misc-html-content h3,
+.misc-html-content h4,
+.misc-html-content h5,
+.misc-html-content h6 {
+  color: var(--color-text-primary);
+  line-height: 1.3;
+}
+
+.misc-html-content p,
+.misc-html-content li {
+  color: var(--color-text-secondary);
+}
+
+.misc-html-content ul,
+.misc-html-content ol {
+  padding-left: 1.5rem;
+}
+
+.misc-html-content li + li {
+  margin-top: 0.5rem;
+}
+
+.misc-html-content a {
+  color: var(--color-text-primary);
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
+.misc-html-content blockquote {
+  padding: var(--spacing-md);
+  background-color: var(--color-bg-secondary);
+  border-left: 3px solid var(--color-accent);
+  color: var(--color-text-tertiary);
+  font-style: italic;
+}
+
+.misc-html-content code {
+  padding: 0.15rem 0.4rem;
+  background-color: var(--color-bg-secondary);
+  border-radius: 4px;
+  color: var(--color-text-primary);
+  font-size: 0.95em;
+}
+
+.misc-html-content pre {
+  padding: var(--spacing-md);
+  background-color: var(--color-bg-secondary);
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.misc-html-content img {
+  max-width: 100%;
+  border-radius: 6px;
+}
+
 /* Math Rendering */
 .math-display {
   margin: var(--spacing-md) 0;
