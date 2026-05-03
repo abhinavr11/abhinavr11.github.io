@@ -96,9 +96,6 @@ const Miscellaneous = () => {
                 >
                   <h3 className="writing-title">{topic.title}</h3>
                   <p className="writing-excerpt">{topic.excerpt}</p>
-                  <div className="writing-meta">
-                    <span className="writing-time">HTML topic</span>
-                  </div>
                 </Link>
               ))}
             </div>

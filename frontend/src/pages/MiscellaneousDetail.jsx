@@ -135,7 +135,6 @@ const MiscellaneousDetail = () => {
       <article className="article-container">
         <header className="article-header">
           <h1 className="article-title">{topic.title}</h1>
-          <p className="article-date">HTML topic</p>
         </header>
         <div
           className="article-content misc-html-content"
