@@ -6,6 +6,11 @@ import { portfolioData } from '../mock';
 const Home = () => {
   const [expandedPub, setExpandedPub] = useState(null);
   const [expandedProj, setExpandedProj] = useState(null);
+  const [openSections, setOpenSections] = useState({
+    publications: false,
+    projects: false,
+    awards: false
+  });
   const mapMyVisitorsWidgetSrc = "https://mapmyvisitors.com/map.js?cl=080808&w=500&t=tt&d=p_b13DPH_wIlvxdVFxRPKMWjiEVy4WhzWTl6AU8htFI&co=ffffff&cmo=3acc3a&cmn=ff5353&ct=808080";
 
   const togglePublication = (id) => {
@@ -14,6 +19,13 @@ const Home = () => {
 
   const toggleProject = (id) => {
     setExpandedProj(expandedProj === id ? null : id);
+  };
+
+  const toggleSection = (section) => {
+    setOpenSections((currentSections) => ({
+      ...currentSections,
+      [section]: !currentSections[section]
+    }));
   };
 
   useEffect(() => {
@@ -102,116 +114,149 @@ const Home = () => {
 
       {/* Publications Section */}
       <section className="content-section" id="publications">
-        <h2 className="section-title">Publications</h2>
-        <div className="section-content">
-          <div className="publications-list">
-            {portfolioData.publications.map((pub) => (
-              <div key={pub.id} className="publication-card">
-                <div 
-                  className="publication-header"
-                  onClick={() => togglePublication(pub.id)}
-                >
-                  <div className="publication-main">
-                    <h3 className="publication-title">{pub.title}</h3>
-                    <p className="publication-authors">{pub.authors}</p>
-                    <p className="publication-venue">{pub.venue}, {pub.year}</p>
+        <button
+          className="section-toggle"
+          type="button"
+          onClick={() => toggleSection('publications')}
+          aria-expanded={openSections.publications}
+          aria-controls="publications-content"
+        >
+          <span className="section-title">Publications</span>
+          {openSections.publications ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
+        </button>
+        {openSections.publications && (
+          <div className="section-content section-dropdown-content" id="publications-content">
+            <div className="publications-list">
+              {portfolioData.publications.map((pub) => (
+                <div key={pub.id} className="publication-card">
+                  <div
+                    className="publication-header"
+                    onClick={() => togglePublication(pub.id)}
+                  >
+                    <div className="publication-main">
+                      <h3 className="publication-title">{pub.title}</h3>
+                      <p className="publication-authors">{pub.authors}</p>
+                      <p className="publication-venue">{pub.venue}, {pub.year}</p>
+                    </div>
+                    <button className="expand-btn" type="button" aria-label="Expand publication details">
+                      {expandedPub === pub.id ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                    </button>
                   </div>
-                  <button className="expand-btn" aria-label="Expand">
-                    {expandedPub === pub.id ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-                  </button>
+                  {expandedPub === pub.id && (
+                    <div className="publication-details">
+                      <p className="publication-desc">{pub.description}</p>
+                      {pub.links.length > 0 && (
+                        <div className="publication-links">
+                          {pub.links.map((link, idx) => (
+                            <a key={idx} href={link.url} className="pub-link" target="_blank" rel="noopener noreferrer">
+                              {link.text}
+                              <ExternalLink size={14} />
+                            </a>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
-                {expandedPub === pub.id && (
-                  <div className="publication-details">
-                    <p className="publication-desc">{pub.description}</p>
-                    {pub.links.length > 0 && (
-                      <div className="publication-links">
-                        {pub.links.map((link, idx) => (
-                          <a key={idx} href={link.url} className="pub-link" target="_blank" rel="noopener noreferrer">
-                            {link.text}
-                            <ExternalLink size={14} />
-                          </a>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </section>
 
       {/* Projects Section */}
       <section className="content-section" id="projects">
-        <h2 className="section-title">Projects</h2>
-        <div className="section-content">
-          <div className="projects-list">
-            {portfolioData.projects.map((proj) => (
-              <div key={proj.id} className="project-card">
-                <div 
-                  className="project-header"
-                  onClick={() => toggleProject(proj.id)}
-                >
-                  <div className="project-main">
-                    <h3 className="project-title">{proj.title}</h3>
-                    <p className="project-org">{proj.organization}</p>
-                    <p className="project-duration">{proj.duration}</p>
-                  </div>
-                  <button className="expand-btn" aria-label="Expand">
-                    {expandedProj === proj.id ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-                  </button>
-                </div>
-                {expandedProj === proj.id && (
-                  <div className="project-details">
-                    <p className="project-desc">{proj.description}</p>
-                    <div className="project-skills">
-                      {proj.skills.map((skill, idx) => (
-                        <span key={idx} className="skill-tag">{skill}</span>
-                      ))}
+        <button
+          className="section-toggle"
+          type="button"
+          onClick={() => toggleSection('projects')}
+          aria-expanded={openSections.projects}
+          aria-controls="projects-content"
+        >
+          <span className="section-title">Projects</span>
+          {openSections.projects ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
+        </button>
+        {openSections.projects && (
+          <div className="section-content section-dropdown-content" id="projects-content">
+            <div className="projects-list">
+              {portfolioData.projects.map((proj) => (
+                <div key={proj.id} className="project-card">
+                  <div
+                    className="project-header"
+                    onClick={() => toggleProject(proj.id)}
+                  >
+                    <div className="project-main">
+                      <h3 className="project-title">{proj.title}</h3>
+                      <p className="project-org">{proj.organization}</p>
+                      <p className="project-duration">{proj.duration}</p>
                     </div>
+                    <button className="expand-btn" type="button" aria-label="Expand project details">
+                      {expandedProj === proj.id ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                    </button>
                   </div>
-                )}
-              </div>
-            ))}
+                  {expandedProj === proj.id && (
+                    <div className="project-details">
+                      <p className="project-desc">{proj.description}</p>
+                      <div className="project-skills">
+                        {proj.skills.map((skill, idx) => (
+                          <span key={idx} className="skill-tag">{skill}</span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </section>
 
       {/* Awards & Services Section */}
       <section className="content-section" id="awards">
-        <h2 className="section-title">Awards & Services</h2>
-        <div className="section-content">
-          <div className="subsection">
-            <h3 className="subsection-title">Awards & Honors</h3>
-            <div className="awards-list">
-              {portfolioData.awards.map((award, index) => (
-                <div key={index} className="award-item">
-                  <div className="award-header">
-                    <h4 className="award-title">{award.title}</h4>
-                    <span className="award-year">{award.year}</span>
+        <button
+          className="section-toggle"
+          type="button"
+          onClick={() => toggleSection('awards')}
+          aria-expanded={openSections.awards}
+          aria-controls="awards-content"
+        >
+          <span className="section-title">Awards & Services</span>
+          {openSections.awards ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
+        </button>
+        {openSections.awards && (
+          <div className="section-content section-dropdown-content" id="awards-content">
+            <div className="subsection">
+              <h3 className="subsection-title">Awards & Honors</h3>
+              <div className="awards-list">
+                {portfolioData.awards.map((award, index) => (
+                  <div key={index} className="award-item">
+                    <div className="award-header">
+                      <h4 className="award-title">{award.title}</h4>
+                      <span className="award-year">{award.year}</span>
+                    </div>
+                    <p className="award-org">{award.organization}</p>
+                    <p className="award-desc">{award.description}</p>
                   </div>
-                  <p className="award-org">{award.organization}</p>
-                  <p className="award-desc">{award.description}</p>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
 
-          <div className="subsection">
-            <h3 className="subsection-title">Services</h3>
-            <div className="services-list">
-              {portfolioData.services.map((service, index) => (
-                <div key={index} className="service-item">
-                  <div className="service-header">
-                    <h4 className="service-role">{service.role}</h4>
-                    <span className="service-year">{service.year}</span>
+            <div className="subsection">
+              <h3 className="subsection-title">Services</h3>
+              <div className="services-list">
+                {portfolioData.services.map((service, index) => (
+                  <div key={index} className="service-item">
+                    <div className="service-header">
+                      <h4 className="service-role">{service.role}</h4>
+                      <span className="service-year">{service.year}</span>
+                    </div>
+                    <p className="service-org">{service.organization}</p>
                   </div>
-                  <p className="service-org">{service.organization}</p>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </section>
 
       {/* Updates Section */}

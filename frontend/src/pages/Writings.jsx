@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Clock } from 'lucide-react';
+import { ArrowLeft, Clock, ChevronDown, ChevronUp } from 'lucide-react';
 import { portfolioData } from '../mock';
 import { loadWritings } from '../lib/writings';
 
@@ -8,6 +8,10 @@ const Writings = () => {
   const [writings, setWritings] = useState({
     technicalWritings: [],
     nonTechnicalWritings: []
+  });
+  const [openSections, setOpenSections] = useState({
+    nonTechnical: false,
+    technical: false
   });
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
@@ -43,6 +47,13 @@ const Writings = () => {
   }, []);
 
   const { technicalWritings, nonTechnicalWritings } = writings;
+
+  const toggleSection = (section) => {
+    setOpenSections((currentSections) => ({
+      ...currentSections,
+      [section]: !currentSections[section]
+    }));
+  };
 
   return (
     <div className="portfolio-container">
@@ -84,96 +95,118 @@ const Writings = () => {
       {/* Non-Technical Writings */}
       {!isLoading && nonTechnicalWritings.length > 0 && (
         <section className="content-section">
-          <h2 className="section-title">Non Technical Articles</h2>
-          <div className="section-content">
-            <div className="writings-grid">
-              {nonTechnicalWritings.map((writing) => (
-                writing.externalUrl ? (
-                  <a
-                    key={writing.id}
-                    href={writing.externalUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="writing-card"
-                  >
-                    <h3 className="writing-title">{writing.title}</h3>
-                    <p className="writing-excerpt">{writing.excerpt}</p>
-                    <div className="writing-meta">
-                      <span className="writing-date">{writing.date}</span>
-                      <span className="writing-time">
-                        <Clock size={14} />
-                        {writing.readTime}
-                      </span>
-                    </div>
-                  </a>
-                ) : (
-                  <Link
-                    key={writing.id}
-                    to={`/writings/${writing.slug}.html`}
-                    className="writing-card"
-                  >
-                    <h3 className="writing-title">{writing.title}</h3>
-                    <p className="writing-excerpt">{writing.excerpt}</p>
-                    <div className="writing-meta">
-                      <span className="writing-date">{writing.date}</span>
-                      <span className="writing-time">
-                        <Clock size={14} />
-                        {writing.readTime}
-                      </span>
-                    </div>
-                  </Link>
-                )
-              ))}
+          <button
+            className="section-toggle"
+            type="button"
+            onClick={() => toggleSection('nonTechnical')}
+            aria-expanded={openSections.nonTechnical}
+            aria-controls="non-technical-writings-content"
+          >
+            <span className="section-title">Non Technical Articles</span>
+            {openSections.nonTechnical ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
+          </button>
+          {openSections.nonTechnical && (
+            <div className="section-content section-dropdown-content" id="non-technical-writings-content">
+              <div className="writings-grid">
+                {nonTechnicalWritings.map((writing) => (
+                  writing.externalUrl ? (
+                    <a
+                      key={writing.id}
+                      href={writing.externalUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="writing-card"
+                    >
+                      <h3 className="writing-title">{writing.title}</h3>
+                      <p className="writing-excerpt">{writing.excerpt}</p>
+                      <div className="writing-meta">
+                        <span className="writing-date">{writing.date}</span>
+                        <span className="writing-time">
+                          <Clock size={14} />
+                          {writing.readTime}
+                        </span>
+                      </div>
+                    </a>
+                  ) : (
+                    <Link
+                      key={writing.id}
+                      to={`/writings/${writing.slug}.html`}
+                      className="writing-card"
+                    >
+                      <h3 className="writing-title">{writing.title}</h3>
+                      <p className="writing-excerpt">{writing.excerpt}</p>
+                      <div className="writing-meta">
+                        <span className="writing-date">{writing.date}</span>
+                        <span className="writing-time">
+                          <Clock size={14} />
+                          {writing.readTime}
+                        </span>
+                      </div>
+                    </Link>
+                  )
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </section>
       )}
 
       {/* Technical Writings */}
       {!isLoading && technicalWritings.length > 0 && (
         <section className="content-section">
-          <h2 className="section-title">Technical</h2>
-          <div className="section-content">
-            <div className="writings-grid">
-              {technicalWritings.map((writing) => (
-                writing.externalUrl ? (
-                  <a
-                    key={writing.id}
-                    href={writing.externalUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="writing-card"
-                  >
-                    <h3 className="writing-title">{writing.title}</h3>
-                    <p className="writing-excerpt">{writing.excerpt}</p>
-                    <div className="writing-meta">
-                      <span className="writing-date">{writing.date}</span>
-                      <span className="writing-time">
-                        <Clock size={14} />
-                        {writing.readTime}
-                      </span>
-                    </div>
-                  </a>
-                ) : (
-                  <Link
-                    key={writing.id}
-                    to={`/writings/${writing.slug}.html`}
-                    className="writing-card"
-                  >
-                    <h3 className="writing-title">{writing.title}</h3>
-                    <p className="writing-excerpt">{writing.excerpt}</p>
-                    <div className="writing-meta">
-                      <span className="writing-date">{writing.date}</span>
-                      <span className="writing-time">
-                        <Clock size={14} />
-                        {writing.readTime}
-                      </span>
-                    </div>
-                  </Link>
-                )
-              ))}
+          <button
+            className="section-toggle"
+            type="button"
+            onClick={() => toggleSection('technical')}
+            aria-expanded={openSections.technical}
+            aria-controls="technical-writings-content"
+          >
+            <span className="section-title">Technical</span>
+            {openSections.technical ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
+          </button>
+          {openSections.technical && (
+            <div className="section-content section-dropdown-content" id="technical-writings-content">
+              <div className="writings-grid">
+                {technicalWritings.map((writing) => (
+                  writing.externalUrl ? (
+                    <a
+                      key={writing.id}
+                      href={writing.externalUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="writing-card"
+                    >
+                      <h3 className="writing-title">{writing.title}</h3>
+                      <p className="writing-excerpt">{writing.excerpt}</p>
+                      <div className="writing-meta">
+                        <span className="writing-date">{writing.date}</span>
+                        <span className="writing-time">
+                          <Clock size={14} />
+                          {writing.readTime}
+                        </span>
+                      </div>
+                    </a>
+                  ) : (
+                    <Link
+                      key={writing.id}
+                      to={`/writings/${writing.slug}.html`}
+                      className="writing-card"
+                    >
+                      <h3 className="writing-title">{writing.title}</h3>
+                      <p className="writing-excerpt">{writing.excerpt}</p>
+                      <div className="writing-meta">
+                        <span className="writing-date">{writing.date}</span>
+                        <span className="writing-time">
+                          <Clock size={14} />
+                          {writing.readTime}
+                        </span>
+                      </div>
+                    </Link>
+                  )
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </section>
       )}
 

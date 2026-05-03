@@ -7,12 +7,12 @@ export const portfolioData = {
     name: "Abhinav Raghuvanshi",
     title: "Nobody",
     location: "Mumbai, Maharashtra",
-    email: "abhinav.raghuvanshi2.ar@gmail.com",
+    email: "abhinavriitb11@gmail.com",
     github: "https://github.com/abhinavr11",
     linkedin: "https://www.linkedin.com/in/abhinavr11/",
     scholar: "https://scholar.google.com/citations?hl=en&user=iF4H3-EAAAAJ",
-    x: "https://x.com/abhinxvr",
-    bio: "I work at the intersection of machine learning, controls, optimization and reinforcement learning. I completed my B.Tech in Aerospace Engineering with a Minor in Computer Science from IIT Bombay. I like rockets and robots but more importantly I like solving hard problems."
+    x: "https://x.com/abhinav_r11",
+    bio: "I am an incoming MS student in Computational Systems Engineering at at Carnegie Mellon University. I work at the intersection of machine learning, controls, optimization and reinforcement learning. I completed my B.Tech in Aerospace Engineering with a Minor in Computer Science from IIT Bombay. I like rockets and robots but more importantly I like solving hard problems."
   },
   
   education: [

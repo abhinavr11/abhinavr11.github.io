@@ -266,6 +266,38 @@ a {
   color: var(--color-text-secondary);
 }
 
+.section-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+  background: none;
+  border: none;
+  padding: 0;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  text-align: left;
+  transition: var(--transition-smooth);
+}
+
+.section-toggle .section-title {
+  margin-bottom: 0;
+}
+
+.section-toggle:hover {
+  color: var(--color-text-secondary);
+}
+
+.section-toggle svg {
+  flex-shrink: 0;
+}
+
+.section-dropdown-content {
+  animation: slideDown 0.3s ease-out;
+}
+
 .subsection {
   margin-bottom: var(--spacing-lg);
 }
@@ -896,6 +928,10 @@ a {
   
   .section-title {
     font-size: 2rem;
+  }
+
+  .section-toggle {
+    align-items: flex-start;
   }
   
   .subsection-title {
