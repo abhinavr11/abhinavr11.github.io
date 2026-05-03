@@ -274,6 +274,23 @@ const Home = () => {
         </div>
       </section>
 
+      {/* References Section */}
+      <section className="content-section" id="references">
+        <h2 className="section-title">References</h2>
+        <div className="section-content">
+          <div className="references-list">
+            {portfolioData.references.map((ref, index) => (
+              <div key={index} className="reference-item">
+                <h4 className="ref-name">{ref.name}</h4>
+                <p className="ref-position">{ref.position}</p>
+                <p className="ref-org">{ref.organization}</p>
+                <a href={`mailto:${ref.email}`} className="ref-email">{ref.email}</a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section className="content-section" id="contact">
         <h2 className="section-title">Contact</h2>
@@ -300,20 +317,6 @@ const Home = () => {
               <Twitter size={20} />
               {portfolioData.personal.x.replace('https://x.com/', '@')}
             </a>
-          </div>
-          
-          <div className="references-section">
-            <h3 className="subsection-title">References</h3>
-            <div className="references-list">
-              {portfolioData.references.map((ref, index) => (
-                <div key={index} className="reference-item">
-                  <h4 className="ref-name">{ref.name}</h4>
-                  <p className="ref-position">{ref.position}</p>
-                  <p className="ref-org">{ref.organization}</p>
-                  <a href={`mailto:${ref.email}`} className="ref-email">{ref.email}</a>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
