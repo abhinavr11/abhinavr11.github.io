@@ -1,15 +1,17 @@
-const truncateText = (text, maxLength = 180) => {
-  if (!text) return '';
-  if (text.length <= maxLength) return text;
-  return `${text.slice(0, maxLength).trimEnd()}...`;
+import manifest from '../generated/miscellaneous-manifest.json';
+
+const publicUrl = process.env.PUBLIC_URL && process.env.PUBLIC_URL !== '.'
+  ? process.env.PUBLIC_URL
+  : '';
+
+const withPublicUrl = (url = '') => {
+  if (!url) return '';
+  if (/^https?:\/\//i.test(url)) return url;
+  if (url.startsWith(publicUrl) || !url.startsWith('/')) return url;
+  return `${publicUrl}${url}`;
 };
 
-const formatTopicTitle = (slug) => slug
-  .replace(/[-_]+/g, ' ')
-  .replace(/\b\w/g, (char) => char.toUpperCase())
-  .trim();
-
-const parseTopicHtml = (rawHtml) => {
+const sanitizeTopicHtml = (rawHtml) => {
   const parser = new DOMParser();
   const document = parser.parseFromString(rawHtml, 'text/html');
 
@@ -17,55 +19,40 @@ const parseTopicHtml = (rawHtml) => {
     element.remove();
   });
 
-  const content = document.body?.innerHTML?.trim() || rawHtml.trim();
-  const plainText = document.body?.textContent?.replace(/\s+/g, ' ').trim() || '';
-
-  return {
-    content,
-    excerpt: truncateText(plainText)
-  };
-};
-
-const parseTopicFile = async (modulePath, sourceKey) => {
-  const response = await fetch(modulePath);
-  if (!response.ok) {
-    throw new Error(`Failed to load miscellaneous file: ${modulePath}`);
-  }
-
-  const rawHtml = await response.text();
-  const slug = sourceKey.split('/').pop()?.replace(/\.html$/, '') || '';
-  const { content, excerpt } = parseTopicHtml(rawHtml);
-
-  return {
-    id: slug,
-    slug,
-    title: formatTopicTitle(slug),
-    excerpt,
-    content
-  };
+  return document.body?.innerHTML?.trim() || rawHtml.trim();
 };
 
 export const loadMiscellaneous = async () => {
-  const topicsContext = require.context('../content/miscellaneous', false, /\.html$/);
-  const topicKeys = topicsContext.keys();
-  const topics = await Promise.all(
-    topicKeys.map(async (key) => parseTopicFile(topicsContext(key), key))
-  );
+  const topics = manifest
+    .map((topic) => ({
+      ...topic,
+      url: withPublicUrl(topic.url)
+    }))
+    .sort((a, b) => a.title.localeCompare(b.title));
 
-  const sortedTopics = topics.sort((a, b) => a.title.localeCompare(b.title));
-  const topicBySlug = sortedTopics.reduce((acc, topic) => {
+  const topicBySlug = topics.reduce((acc, topic) => {
     acc[topic.slug] = topic;
     return acc;
   }, {});
 
-  const topicById = sortedTopics.reduce((acc, topic) => {
+  const topicById = topics.reduce((acc, topic) => {
     acc[topic.id] = topic;
     return acc;
   }, {});
 
   return {
-    topics: sortedTopics,
+    topics,
     topicBySlug,
     topicById
   };
+};
+
+export const loadMiscellaneousTopicContent = async (url) => {
+  const response = await fetch(withPublicUrl(url));
+  if (!response.ok) {
+    throw new Error(`Failed to load miscellaneous file: ${url}`);
+  }
+
+  const rawHtml = await response.text();
+  return sanitizeTopicHtml(rawHtml);
 };

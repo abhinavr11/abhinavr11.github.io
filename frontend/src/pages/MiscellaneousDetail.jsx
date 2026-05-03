@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { portfolioData } from '../mock';
-import { loadMiscellaneous } from '../lib/miscellaneous';
+import { loadMiscellaneous, loadMiscellaneousTopicContent } from '../lib/miscellaneous';
 
 const MiscellaneousDetail = () => {
   const { slug, id } = useParams();
@@ -10,6 +10,7 @@ const MiscellaneousDetail = () => {
   const lookupKey = slug || id;
   const cleanLookupKey = lookupKey?.replace(/\.[a-f0-9]{8,}$/i, '');
   const [topic, setTopic] = useState(null);
+  const [content, setContent] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -35,7 +36,11 @@ const MiscellaneousDetail = () => {
           navigate(`/miscellaneous/${nextTopic.slug}.html`, { replace: true });
         }
 
+        const nextContent = await loadMiscellaneousTopicContent(nextTopic.url);
+        if (!mounted) return;
+
         setTopic(nextTopic);
+        setContent(nextContent);
         setError('');
       } catch (loadError) {
         if (mounted) {
@@ -134,7 +139,7 @@ const MiscellaneousDetail = () => {
         </header>
         <div
           className="article-content misc-html-content"
-          dangerouslySetInnerHTML={{ __html: topic.content }}
+          dangerouslySetInnerHTML={{ __html: content }}
         />
       </article>
 

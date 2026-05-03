@@ -77,7 +77,7 @@ const Miscellaneous = () => {
         <section className="content-section">
           <div className="section-content">
             <p className="placeholder-text">
-              Add HTML files to <code>frontend/src/content/miscellaneous</code> to create topics here.
+              Add HTML files to <code>frontend/public/miscellaneous</code> to create topics here.
             </p>
           </div>
         </section>
