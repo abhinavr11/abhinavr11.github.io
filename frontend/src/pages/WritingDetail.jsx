@@ -5,6 +5,7 @@ import { portfolioData } from '../mock';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
 import { loadWritings } from '../lib/writings';
+import ArticleClaps from '../components/ArticleClaps';
 
 const WritingDetail = () => {
   const { slug, id } = useParams();
@@ -263,6 +264,7 @@ const WritingDetail = () => {
         <div className="article-content">
           {renderMarkdown(content.content)}
         </div>
+        <ArticleClaps slug={content.slug} />
       </article>
 
       {/* Footer */}
