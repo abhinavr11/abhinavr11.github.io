@@ -187,7 +187,6 @@ const Writings = () => {
         <section className="content-section writings-latest-section">
           <div className="writings-section-heading">
             <h2 className="section-title">Latest Articles</h2>
-            <p>Newest writing first, with the archives tucked into each section below.</p>
           </div>
           <div className="writings-latest-grid">
             {latestWritings.map((writing, index) => (

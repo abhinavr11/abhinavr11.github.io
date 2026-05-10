@@ -43,7 +43,32 @@ const parseFrontmatter = (rawMarkdown) => {
 };
 
 const parseComparableDate = (value) => {
-  const timestamp = Date.parse(value || '');
+  const normalizedValue = String(value || '').trim();
+  const monthYearMatch = normalizedValue.match(/^([A-Za-z]+)\s+(\d{4})$/);
+
+  if (monthYearMatch) {
+    const [, monthName, year] = monthYearMatch;
+    const monthIndex = [
+      'january',
+      'february',
+      'march',
+      'april',
+      'may',
+      'june',
+      'july',
+      'august',
+      'september',
+      'october',
+      'november',
+      'december'
+    ].indexOf(monthName.toLowerCase());
+
+    if (monthIndex !== -1) {
+      return Date.UTC(Number(year), monthIndex, 1);
+    }
+  }
+
+  const timestamp = Date.parse(normalizedValue);
   return Number.isNaN(timestamp) ? 0 : timestamp;
 };
 
