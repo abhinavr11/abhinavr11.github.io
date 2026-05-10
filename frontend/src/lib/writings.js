@@ -47,6 +47,10 @@ const parseComparableDate = (value) => {
   return Number.isNaN(timestamp) ? 0 : timestamp;
 };
 
+const sortLatestFirst = (writings) => (
+  [...writings].sort((a, b) => b.sortDate - a.sortDate || a.title.localeCompare(b.title))
+);
+
 const parseWritingFile = async (modulePath, sourceKey, category) => {
   const response = await fetch(modulePath);
   if (!response.ok) {
@@ -82,7 +86,7 @@ const loadCategory = async (context, category) => {
     })
   );
 
-  return writings.sort((a, b) => b.sortDate - a.sortDate || a.title.localeCompare(b.title));
+  return sortLatestFirst(writings);
 };
 
 export const loadWritings = async () => {
@@ -94,7 +98,7 @@ export const loadWritings = async () => {
     loadCategory(nonTechnicalContext, 'non-technical')
   ]);
 
-  const allWritings = [...technicalWritings, ...nonTechnicalWritings];
+  const allWritings = sortLatestFirst([...technicalWritings, ...nonTechnicalWritings]);
   const writingBySlug = allWritings.reduce((acc, writing) => {
     acc[writing.slug] = writing;
     return acc;
@@ -108,6 +112,7 @@ export const loadWritings = async () => {
   return {
     technicalWritings,
     nonTechnicalWritings,
+    allWritings,
     writingBySlug,
     writingById
   };

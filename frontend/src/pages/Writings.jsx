@@ -4,10 +4,99 @@ import { ArrowLeft, Clock, ChevronDown, ChevronUp } from 'lucide-react';
 import { portfolioData } from '../mock';
 import { loadWritings } from '../lib/writings';
 
+const WritingCard = ({ writing, variant = '' }) => {
+  const className = ['writing-card', variant].filter(Boolean).join(' ');
+  const content = (
+    <>
+      <h3 className="writing-title">{writing.title}</h3>
+      <p className="writing-excerpt">{writing.excerpt}</p>
+      <div className="writing-meta">
+        <span className="writing-date">{writing.date}</span>
+        <span className="writing-time">
+          <Clock size={14} />
+          {writing.readTime}
+        </span>
+      </div>
+    </>
+  );
+
+  if (writing.externalUrl) {
+    return (
+      <a
+        href={writing.externalUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={className}
+      >
+        {content}
+      </a>
+    );
+  }
+
+  return (
+    <Link to={`/writings/${writing.slug}.html`} className={className}>
+      {content}
+    </Link>
+  );
+};
+
+const CategoryPanel = ({
+  id,
+  title,
+  writings,
+  isOpen,
+  onToggle
+}) => {
+  if (!writings.length) return null;
+
+  const featuredWriting = writings[0];
+  const remainingWritings = writings.slice(1);
+  const dropdownLabel = remainingWritings.length
+    ? `${remainingWritings.length} more`
+    : 'No older articles yet';
+
+  return (
+    <section className="writing-category-panel">
+      <button
+        className="section-toggle writing-category-toggle"
+        type="button"
+        onClick={onToggle}
+        aria-expanded={isOpen}
+        aria-controls={`${id}-writings-content`}
+      >
+        <span>
+          <span className="section-title writing-category-title">{title}</span>
+          <span className="writing-category-count">{dropdownLabel}</span>
+        </span>
+        {isOpen ? <ChevronUp size={22} /> : <ChevronDown size={22} />}
+      </button>
+
+      <div className="writing-category-preview">
+        <WritingCard writing={featuredWriting} variant="writing-card-compact" />
+      </div>
+
+      {isOpen && (
+        <div className="section-dropdown-content writing-category-dropdown" id={`${id}-writings-content`}>
+          {remainingWritings.length > 0 ? (
+            <div className="writings-grid writings-grid-compact">
+              {remainingWritings.map((writing) => (
+                <WritingCard key={writing.id} writing={writing} variant="writing-card-compact" />
+              ))}
+            </div>
+          ) : (
+            <p className="writing-empty-note">The newest article is already shown above.</p>
+          )}
+        </div>
+      )}
+    </section>
+  );
+};
+
 const Writings = () => {
   const [writings, setWritings] = useState({
     technicalWritings: [],
-    nonTechnicalWritings: []
+    nonTechnicalWritings: [],
+    allWritings: []
   });
   const [openSections, setOpenSections] = useState({
     nonTechnical: false,
@@ -25,7 +114,8 @@ const Writings = () => {
         if (mounted) {
           setWritings({
             technicalWritings: data.technicalWritings,
-            nonTechnicalWritings: data.nonTechnicalWritings
+            nonTechnicalWritings: data.nonTechnicalWritings,
+            allWritings: data.allWritings
           });
           setError('');
         }
@@ -46,7 +136,8 @@ const Writings = () => {
     };
   }, []);
 
-  const { technicalWritings, nonTechnicalWritings } = writings;
+  const { technicalWritings, nonTechnicalWritings, allWritings } = writings;
+  const latestWritings = allWritings.slice(0, 3);
 
   const toggleSection = (section) => {
     setOpenSections((currentSections) => ({
@@ -92,121 +183,42 @@ const Writings = () => {
         </section>
       )}
 
-      {/* Non-Technical Writings */}
-      {!isLoading && nonTechnicalWritings.length > 0 && (
-        <section className="content-section">
-          <button
-            className="section-toggle"
-            type="button"
-            onClick={() => toggleSection('nonTechnical')}
-            aria-expanded={openSections.nonTechnical}
-            aria-controls="non-technical-writings-content"
-          >
-            <span className="section-title">Non Technical Articles</span>
-            {openSections.nonTechnical ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
-          </button>
-          {openSections.nonTechnical && (
-            <div className="section-content section-dropdown-content" id="non-technical-writings-content">
-              <div className="writings-grid">
-                {nonTechnicalWritings.map((writing) => (
-                  writing.externalUrl ? (
-                    <a
-                      key={writing.id}
-                      href={writing.externalUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="writing-card"
-                    >
-                      <h3 className="writing-title">{writing.title}</h3>
-                      <p className="writing-excerpt">{writing.excerpt}</p>
-                      <div className="writing-meta">
-                        <span className="writing-date">{writing.date}</span>
-                        <span className="writing-time">
-                          <Clock size={14} />
-                          {writing.readTime}
-                        </span>
-                      </div>
-                    </a>
-                  ) : (
-                    <Link
-                      key={writing.id}
-                      to={`/writings/${writing.slug}.html`}
-                      className="writing-card"
-                    >
-                      <h3 className="writing-title">{writing.title}</h3>
-                      <p className="writing-excerpt">{writing.excerpt}</p>
-                      <div className="writing-meta">
-                        <span className="writing-date">{writing.date}</span>
-                        <span className="writing-time">
-                          <Clock size={14} />
-                          {writing.readTime}
-                        </span>
-                      </div>
-                    </Link>
-                  )
-                ))}
-              </div>
-            </div>
-          )}
+      {!isLoading && latestWritings.length > 0 && (
+        <section className="content-section writings-latest-section">
+          <div className="writings-section-heading">
+            <h2 className="section-title">Latest Articles</h2>
+            <p>Newest writing first, with the archives tucked into each section below.</p>
+          </div>
+          <div className="writings-latest-grid">
+            {latestWritings.map((writing, index) => (
+              <WritingCard
+                key={writing.id}
+                writing={writing}
+                variant={index === 0 ? 'writing-card-featured' : 'writing-card-compact'}
+              />
+            ))}
+          </div>
         </section>
       )}
 
-      {/* Technical Writings */}
-      {!isLoading && technicalWritings.length > 0 && (
-        <section className="content-section">
-          <button
-            className="section-toggle"
-            type="button"
-            onClick={() => toggleSection('technical')}
-            aria-expanded={openSections.technical}
-            aria-controls="technical-writings-content"
-          >
-            <span className="section-title">Technical</span>
-            {openSections.technical ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
-          </button>
-          {openSections.technical && (
-            <div className="section-content section-dropdown-content" id="technical-writings-content">
-              <div className="writings-grid">
-                {technicalWritings.map((writing) => (
-                  writing.externalUrl ? (
-                    <a
-                      key={writing.id}
-                      href={writing.externalUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="writing-card"
-                    >
-                      <h3 className="writing-title">{writing.title}</h3>
-                      <p className="writing-excerpt">{writing.excerpt}</p>
-                      <div className="writing-meta">
-                        <span className="writing-date">{writing.date}</span>
-                        <span className="writing-time">
-                          <Clock size={14} />
-                          {writing.readTime}
-                        </span>
-                      </div>
-                    </a>
-                  ) : (
-                    <Link
-                      key={writing.id}
-                      to={`/writings/${writing.slug}.html`}
-                      className="writing-card"
-                    >
-                      <h3 className="writing-title">{writing.title}</h3>
-                      <p className="writing-excerpt">{writing.excerpt}</p>
-                      <div className="writing-meta">
-                        <span className="writing-date">{writing.date}</span>
-                        <span className="writing-time">
-                          <Clock size={14} />
-                          {writing.readTime}
-                        </span>
-                      </div>
-                    </Link>
-                  )
-                ))}
-              </div>
-            </div>
-          )}
+      {!isLoading && (nonTechnicalWritings.length > 0 || technicalWritings.length > 0) && (
+        <section className="content-section writings-categories-section">
+          <div className="writing-category-panels">
+            <CategoryPanel
+              id="non-technical"
+              title="Non-Technical"
+              writings={nonTechnicalWritings}
+              isOpen={openSections.nonTechnical}
+              onToggle={() => toggleSection('nonTechnical')}
+            />
+            <CategoryPanel
+              id="technical"
+              title="Technical"
+              writings={technicalWritings}
+              isOpen={openSections.technical}
+              onToggle={() => toggleSection('technical')}
+            />
+          </div>
         </section>
       )}
 
