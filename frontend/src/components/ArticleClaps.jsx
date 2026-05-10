@@ -1,6 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Heart } from 'lucide-react';
-import { getArticleClapCount, incrementArticleClaps, isArticleClapsConfigured } from '../lib/articleClaps';
+import { PartyPopper } from 'lucide-react';
+import {
+  getArticleClapCount,
+  getArticleClapVisitorId,
+  incrementArticleClaps,
+  isArticleClapsConfigured
+} from '../lib/articleClaps';
 
 const ArticleClaps = ({ slug }) => {
   const storageKey = useMemo(() => `article-clapped:${slug}`, [slug]);
@@ -9,6 +14,7 @@ const ArticleClaps = ({ slug }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const [visitorId, setVisitorId] = useState('');
 
   useEffect(() => {
     let mounted = true;
@@ -20,10 +26,12 @@ const ArticleClaps = ({ slug }) => {
       }
 
       try {
+        const currentVisitorId = getArticleClapVisitorId();
         const savedClap = window.localStorage.getItem(storageKey) === 'true';
         const clapCount = await getArticleClapCount(slug);
 
         if (mounted) {
+          setVisitorId(currentVisitorId);
           setHasClapped(savedClap);
           setCount(clapCount);
           setHasError(false);
@@ -47,16 +55,16 @@ const ArticleClaps = ({ slug }) => {
   }, [slug, storageKey]);
 
   const handleClap = async () => {
-    if (hasClapped || isSaving || !slug) return;
+    if (hasClapped || isSaving || !slug || !visitorId) return;
 
     setIsSaving(true);
     setHasError(false);
 
     try {
-      const nextCount = await incrementArticleClaps(slug);
+      const result = await incrementArticleClaps(slug, visitorId);
       window.localStorage.setItem(storageKey, 'true');
       setHasClapped(true);
-      setCount(nextCount);
+      setCount(result.count);
     } catch (error) {
       setHasError(true);
     } finally {
@@ -74,9 +82,10 @@ const ArticleClaps = ({ slug }) => {
         onClick={handleClap}
         disabled={isLoading || isSaving || hasClapped}
         aria-pressed={hasClapped}
+        title={hasClapped ? 'Already clapped' : 'Clap for this article'}
       >
-        <Heart size={18} fill={hasClapped ? 'currentColor' : 'none'} />
-        <span>{hasClapped ? 'Liked' : 'Like'}</span>
+        <PartyPopper size={18} />
+        <span>{hasClapped ? 'Clapped' : 'Clap'}</span>
         <strong>{isLoading ? '...' : count}</strong>
       </button>
       {hasError && (

@@ -810,6 +810,7 @@ a {
   border-top: 1px solid var(--color-border);
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: var(--spacing-sm);
   flex-wrap: wrap;
 }
@@ -820,7 +821,7 @@ a {
   align-items: center;
   gap: 0.55rem;
   border: 1px solid rgba(245, 243, 240, 0.22);
-  border-radius: 999px;
+  border-radius: 8px;
   padding: 0.55rem 0.95rem;
   background: rgba(245, 243, 240, 0.05);
   color: var(--color-text-primary);
@@ -853,6 +854,8 @@ a {
 .article-clap-status {
   color: var(--color-text-tertiary);
   font-size: 0.95rem;
+  width: 100%;
+  text-align: right;
 }
 
 .misc-html-content > * + * {
