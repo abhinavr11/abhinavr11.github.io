@@ -58,8 +58,8 @@ const Home = () => {
             <a href="#projects" className="nav-link">Projects</a>
             <a href="#awards" className="nav-link">Awards</a>
             <a href="#updates" className="nav-link">Updates</a>
-            <Link to="/writings" className="nav-link">Writings</Link>
-            <Link to="/miscellaneous" className="nav-link">Miscellaneous</Link>
+            <Link to="/writings.html" className="nav-link">Writings</Link>
+            <Link to="/miscellaneous.html" className="nav-link">Miscellaneous</Link>
             <a href="#contact" className="nav-link">Contact</a>
           </nav>
         </div>

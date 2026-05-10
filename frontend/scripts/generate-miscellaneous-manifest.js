@@ -12,7 +12,9 @@ const ensureDirectory = (directoryPath) => {
 
 const toTitle = (slug) => slug
   .replace(/[-_]+/g, ' ')
-  .replace(/\b\w/g, (char) => char.toUpperCase())
+  .replace(/\p{L}[\p{L}\p{M}]*/gu, (word) => (
+    word.charAt(0).toLocaleUpperCase() + word.slice(1).toLocaleLowerCase()
+  ))
   .trim();
 
 const stripHtml = (html) => html
@@ -35,7 +37,7 @@ ensureDirectory(sourceDir);
 ensureDirectory(outputDir);
 
 const manifest = fs.readdirSync(sourceDir, { withFileTypes: true })
-  .filter((entry) => entry.isFile() && entry.name.endsWith('.html'))
+  .filter((entry) => entry.isFile() && entry.name.endsWith('.html') && entry.name !== 'index.html')
   .map((entry) => {
     const slug = entry.name.replace(/\.html$/, '');
     const html = fs.readFileSync(path.join(sourceDir, entry.name), 'utf8');

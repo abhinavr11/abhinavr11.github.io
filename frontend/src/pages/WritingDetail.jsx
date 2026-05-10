@@ -185,7 +185,7 @@ const WritingDetail = () => {
       <div className="portfolio-container">
         <header className="site-header">
           <div className="header-content">
-            <Link to="/writings" className="back-link">
+            <Link to="/writings.html" className="back-link">
               <ArrowLeft size={20} />
               <span>Back to Writings</span>
             </Link>
@@ -205,7 +205,7 @@ const WritingDetail = () => {
       <div className="portfolio-container">
         <header className="site-header">
           <div className="header-content">
-            <Link to="/writings" className="back-link">
+            <Link to="/writings.html" className="back-link">
               <ArrowLeft size={20} />
               <span>Back to Writings</span>
             </Link>
@@ -226,7 +226,7 @@ const WritingDetail = () => {
       <div className="portfolio-container">
         <header className="site-header">
           <div className="header-content">
-            <Link to="/writings" className="back-link">
+            <Link to="/writings.html" className="back-link">
               <ArrowLeft size={20} />
               <span>Back to Writings</span>
             </Link>
@@ -247,7 +247,7 @@ const WritingDetail = () => {
       {/* Header */}
       <header className="site-header">
         <div className="header-content">
-          <Link to="/writings" className="back-link">
+          <Link to="/writings.html" className="back-link">
             <ArrowLeft size={20} />
             <span>Back to Writings</span>
           </Link>

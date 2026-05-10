@@ -64,7 +64,7 @@ const MiscellaneousDetail = () => {
       <div className="portfolio-container">
         <header className="site-header">
           <div className="header-content">
-            <Link to="/miscellaneous" className="back-link">
+            <Link to="/miscellaneous.html" className="back-link">
               <ArrowLeft size={20} />
               <span>Back to Miscellaneous</span>
             </Link>
@@ -84,7 +84,7 @@ const MiscellaneousDetail = () => {
       <div className="portfolio-container">
         <header className="site-header">
           <div className="header-content">
-            <Link to="/miscellaneous" className="back-link">
+            <Link to="/miscellaneous.html" className="back-link">
               <ArrowLeft size={20} />
               <span>Back to Miscellaneous</span>
             </Link>
@@ -105,7 +105,7 @@ const MiscellaneousDetail = () => {
       <div className="portfolio-container">
         <header className="site-header">
           <div className="header-content">
-            <Link to="/miscellaneous" className="back-link">
+            <Link to="/miscellaneous.html" className="back-link">
               <ArrowLeft size={20} />
               <span>Back to Miscellaneous</span>
             </Link>
@@ -125,7 +125,7 @@ const MiscellaneousDetail = () => {
     <div className="portfolio-container">
       <header className="site-header">
         <div className="header-content">
-          <Link to="/miscellaneous" className="back-link">
+          <Link to="/miscellaneous.html" className="back-link">
             <ArrowLeft size={20} />
             <span>Back to Miscellaneous</span>
           </Link>

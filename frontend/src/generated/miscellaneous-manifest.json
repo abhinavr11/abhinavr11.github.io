@@ -1,9 +1,9 @@
 [
   {
-    "id": "lorem-ipsum",
-    "slug": "lorem-ipsum",
-    "title": "Lorem Ipsum",
-    "excerpt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer feugiat, augue id sagittis fermentum, tortor mi vulputate neque, vel congue nunc dui non lorem. Sed interdum mattis...",
-    "url": "/miscellaneous/lorem-ipsum.html"
+    "id": "My-Erdős-Number",
+    "slug": "My-Erdős-Number",
+    "title": "My Erdős Number",
+    "excerpt": "Collaboration Distance An Erdős number measures coauthorship distance from Paul Erdős. Erdős himself has number 0, his direct coauthors have number 1, their coauthors have number 2...",
+    "url": "/miscellaneous/My-Erdős-Number.html"
   }
 ]
