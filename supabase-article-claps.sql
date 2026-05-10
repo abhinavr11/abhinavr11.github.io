@@ -26,6 +26,9 @@ begin
 end;
 $$;
 
+create unique index if not exists article_claps_slug_unique
+on public.article_claps (slug);
+
 alter table public.article_claps enable row level security;
 
 drop policy if exists "Anyone can read article claps" on public.article_claps;
