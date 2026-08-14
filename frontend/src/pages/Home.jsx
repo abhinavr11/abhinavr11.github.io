@@ -76,7 +76,8 @@ const Home = () => {
             <p className="hero-subtitle">{portfolioData.personal.title}</p>
             <blockquote className="hero-quote">
               <span>"Only by being able to endure what people cannot bear, can you do what people cannot do."</span>
-              <cite className="hero-quote-author">— John D. Rockefeller's Letter to His Son</cite>
+              {/* Temporarily hidden attribution: — John D. Rockefeller's Letter to His Son */}
+              <cite className="hero-quote-author">--</cite>
             </blockquote>
           </div>
         </div>

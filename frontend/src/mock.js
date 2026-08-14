@@ -12,7 +12,8 @@ export const portfolioData = {
     linkedin: "https://www.linkedin.com/in/abhinavr11/",
     scholar: "https://scholar.google.com/citations?hl=en&user=iF4H3-EAAAAJ",
     x: "https://x.com/abhinav_r11",
-    bio: "I am an incoming MS student in Computational Systems Engineering at Carnegie Mellon University. I work at the intersection of machine learning, controls, optimization and reinforcement learning. I completed my B.Tech in Aerospace Engineering with a Minor in Computer Science from IIT Bombay. I like rockets and robots but more importantly I like solving hard problems."
+    // Temporarily hidden: "I am an incoming MS student in Computational Systems Engineering at Carnegie Mellon University."
+    bio: "I work at the intersection of machine learning, controls, optimization and reinforcement learning. I completed my B.Tech in Aerospace Engineering with a Minor in Computer Science from IIT Bombay. I like rockets and robots but more importantly I like solving hard problems."
   },
   
   education: [
@@ -32,6 +33,14 @@ export const portfolioData = {
   ],
 
   updates: [
+    {
+      date: "2026",
+      text: "Paper accepted at the 33rd International Conference on Neural Information Processing"
+    },
+    {
+      date: "2026",
+      text: "Paper accepted at the 42nd Conference on Uncertainty in Artificial Intelligence"
+    },
     {
       date: "January 2025",
       text: "Paper on gradient-based optimal function learning submitted to TMLR"
@@ -91,7 +100,7 @@ export const portfolioData = {
       id: "pub5",
       title: "Quantized Stochastic Primal–Dual Methods for Distributed Optimization under Relaxed Global Geometry",
       authors: "Abhinav Raghuvanshi*, Susmit Sarkar*, Kushal Chakrabarti, Mayank Baranwal",
-      venue: "Under review in UAI",
+      venue: "Accepted at the 42nd Conference on Uncertainty in Artificial Intelligence",
       year: "2026",
       description: "We study distributed optimization with stochastic gradients and finite-bit communication modeled by random (unbiased) quantization. We propose q-PDGD, a quantized stochastic primal–dual method, and analyze it under relaxed global geometry. Under restricted secant inequality (RSI), a constant step-size yields linear contraction to an explicit neighborhood determined by gradient noise.",
       links: []
@@ -100,7 +109,7 @@ export const portfolioData = {
       id: "pub6",
       title: "Quantized Stochastic Primal–Dual Method for Distributed Optimization under Restricted Secant Inequality",
       authors: "Abhinav Raghuvanshi*, Susmit Sarkar*, Kushal Chakrabarti, Mayank Baranwal",
-      venue: "Under review in CDC",
+      venue: "Under review at the Twelfth Indian Control Conference",
       year: "2026",
       description: "We investigate networked stochastic optimization in the presence of communication constraints, modeling finite-precision message passing through unbiased random quantization. We develop q-PDGD, a quantized stochastic primal-dual scheme, and prove convergence under the restricted secant inequality (RSI), without imposing any shared-solution requirement across agents. Our results show that a constant stepsize delivers geometric decay to a computable error neighborhood whose size reflects stochastic gradient noise, quantization effects, and spectral properties of the communication graph, while a diminishing stepsize yields an O(1/k) convergence rate. Up to network- and compression-dependent terms, the resulting oracle complexity aligns with the strongest known rates for centralized stochastic optimization. Experimental results support the analysis and demonstrate the interplay between communication precision, stepsize design, and topology.",
       links: []
@@ -109,7 +118,7 @@ export const portfolioData = {
       id: "pub2",
       title: "Fast Tracks Only: Delay-Prioritized Event Queues for Efficient Scalable Railway Scheduling",
       authors: "Anandsingh Chauhan, Abhinav Raghuvanshi, Tamoghno Kandar, Mayank Baranwal",
-      venue: "Under review in AAMAS",
+      venue: "Accepted at the 33rd International Conference on Neural Information Processing",
       year: "2026",
       description: "Tackled the NP-hard railway scheduling problem as a multi-agent dynamical system. Designed PRIORITY-Q, a resource-aware optimization algorithm using prioritized event queues. Provided formal safety guarantees (collision- and deadlock-free) and achieved faster computation than RL baselines.",
       links: []
