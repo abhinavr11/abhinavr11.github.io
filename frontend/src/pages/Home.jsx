@@ -296,6 +296,10 @@ const Home = () => {
               <Twitter size={20} />
               {portfolioData.personal.x.replace('https://x.com/', '@')}
             </a>
+            <a href={portfolioData.personal.secondaryX} target="_blank" rel="noopener noreferrer" className="contact-link">
+              <Twitter size={20} />
+              {portfolioData.personal.secondaryX.replace('https://x.com/', '@')}
+            </a>
           </div>
         </div>
       </section>
