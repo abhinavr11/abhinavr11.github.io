@@ -13,8 +13,7 @@ export const portfolioData = {
     scholar: "https://scholar.google.com/citations?hl=en&user=iF4H3-EAAAAJ",
     x: "https://x.com/abhinav_r11",
     secondaryX: "https://x.com/abhinxvr",
-    // Temporarily hidden: "I am an incoming MS student in Computational Systems Engineering at Carnegie Mellon University."
-    bio: "I work at the intersection of machine learning, controls, optimization and reinforcement learning. I completed my B.Tech in Aerospace Engineering with a Minor in Computer Science from IIT Bombay. I like rockets and robots but more importantly I like solving hard problems."
+    bio: "I am an MS student in Computational Systems Engineering at Carnegie Mellon University. I work at the intersection of machine learning, controls, optimization and reinforcement learning. I completed my B.Tech in Aerospace Engineering with a Minor in Computer Science from IIT Bombay. I like rockets and robots but more importantly I like solving hard problems."
   },
   
   education: [
