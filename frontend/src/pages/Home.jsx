@@ -75,7 +75,7 @@ const Home = () => {
             <h1 className="hero-title">{portfolioData.personal.name}</h1>
             <p className="hero-subtitle">{portfolioData.personal.title}</p>
             <blockquote className="hero-quote">
-              <span>"Only by being able to endure what people cannot bear, can you do what people cannot do."</span>
+              <span>“Only by being able to endure what people cannot bear, can you do what people cannot do.”</span>
               <cite className="hero-quote-author">— John D. Rockefeller's Letter to His Son</cite>
             </blockquote>
           </div>
@@ -290,10 +290,6 @@ const Home = () => {
             <a href={portfolioData.personal.scholar} target="_blank" rel="noopener noreferrer" className="contact-link">
               <GraduationCap size={20} />
               Google Scholar
-            </a>
-            <a href={portfolioData.personal.x} target="_blank" rel="noopener noreferrer" className="contact-link">
-              <Twitter size={20} />
-              {portfolioData.personal.x.replace('https://x.com/', '@')}
             </a>
             <a href={portfolioData.personal.secondaryX} target="_blank" rel="noopener noreferrer" className="contact-link">
               <Twitter size={20} />

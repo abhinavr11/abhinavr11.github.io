@@ -11,7 +11,6 @@ export const portfolioData = {
     github: "https://github.com/abhinavr11",
     linkedin: "https://www.linkedin.com/in/abhinavr11/",
     scholar: "https://scholar.google.com/citations?hl=en&user=iF4H3-EAAAAJ",
-    x: "https://x.com/abhinav_r11",
     secondaryX: "https://x.com/abhinxvr",
     bio: "I am an MS student in Computational Systems Engineering at Carnegie Mellon University. I work at the intersection of machine learning, controls, optimization and reinforcement learning. I completed my B.Tech in Aerospace Engineering with a Minor in Computer Science from IIT Bombay. I like rockets and robots but more importantly I like solving hard problems."
   },
@@ -33,6 +32,10 @@ export const portfolioData = {
   ],
 
   updates: [
+    {
+      date: "2026",
+      text: "Paper on quantized stochastic primal–dual methods accepted at the Twelfth Indian Control Conference (ICC)"
+    },
     {
       date: "2026",
       text: "Paper accepted at the 33rd International Conference on Neural Information Processing"
@@ -109,7 +112,7 @@ export const portfolioData = {
       id: "pub6",
       title: "Quantized Stochastic Primal–Dual Method for Distributed Optimization under Restricted Secant Inequality",
       authors: "Abhinav Raghuvanshi*, Susmit Sarkar*, Kushal Chakrabarti, Mayank Baranwal",
-      venue: "Under review at the Twelfth Indian Control Conference",
+      venue: "Accepted at the Twelfth Indian Control Conference",
       year: "2026",
       description: "We investigate networked stochastic optimization in the presence of communication constraints, modeling finite-precision message passing through unbiased random quantization. We develop q-PDGD, a quantized stochastic primal-dual scheme, and prove convergence under the restricted secant inequality (RSI), without imposing any shared-solution requirement across agents. Our results show that a constant stepsize delivers geometric decay to a computable error neighborhood whose size reflects stochastic gradient noise, quantization effects, and spectral properties of the communication graph, while a diminishing stepsize yields an O(1/k) convergence rate. Up to network- and compression-dependent terms, the resulting oracle complexity aligns with the strongest known rates for centralized stochastic optimization. Experimental results support the analysis and demonstrate the interplay between communication precision, stepsize design, and topology.",
       links: []
