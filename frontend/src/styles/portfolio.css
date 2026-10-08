@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Crimson+Text:wght@400;600;700&family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Crimson+Text:wght@400;600;700&family=Cormorant+Garamond:ital,wght@1,300;1,400&family=Noto+Serif+Devanagari:wght@400;500&display=swap');
 
 /* CSS Variables */
 :root {
@@ -224,8 +224,8 @@ a {
 
 .hero-quote {
   margin-top: var(--spacing-md);
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
+  font-family: 'Noto Serif Devanagari', serif;
+  font-style: normal;
   font-size: 1.3rem;
   font-weight: 400;
   color: var(--color-text-secondary);
@@ -237,15 +237,43 @@ a {
   gap: 0.75rem;
 }
 
-.hero-quote-author {
-  font-family: var(--font-body);
-  font-style: normal;
-  font-size: 0.95rem;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  line-height: 1.5;
-  text-wrap: balance;
+.hero-quote-text {
+  position: relative;
+  align-self: flex-start;
+  cursor: help;
+}
+
+.hero-quote-text:focus-visible {
+  outline: 1px solid var(--color-text-tertiary);
+  outline-offset: 6px;
+  border-radius: 2px;
+}
+
+.hero-quote-meaning {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+  width: max-content;
+  max-width: min(18rem, 80vw);
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-bg-secondary);
   color: var(--color-text-secondary);
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.hero-quote-text:hover .hero-quote-meaning,
+.hero-quote-text:focus .hero-quote-meaning {
+  opacity: 1;
+  visibility: visible;
 }
 
 /* Content Sections */

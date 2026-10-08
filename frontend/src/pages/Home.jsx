@@ -75,8 +75,12 @@ const Home = () => {
             <h1 className="hero-title">{portfolioData.personal.name}</h1>
             <p className="hero-subtitle">{portfolioData.personal.title}</p>
             <blockquote className="hero-quote">
-              <span>“Only by being able to endure what people cannot bear, can you do what people cannot do.”</span>
-              <cite className="hero-quote-author">— John D. Rockefeller's Letter to His Son</cite>
+              <span className="hero-quote-text" tabIndex={0} aria-describedby="hero-quote-meaning">
+                <span lang="sa">तमसो मा ज्योतिर्गमय</span>
+                <span className="hero-quote-meaning" id="hero-quote-meaning" role="tooltip">
+                  From darkness, lead me to light
+                </span>
+              </span>
             </blockquote>
           </div>
         </div>
