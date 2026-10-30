@@ -116,7 +116,13 @@ const WritingDetail = () => {
             const math = inlinePart.slice(1, -1);
             return <span key={`${idx}-${inlineIdx}`} className="math-inline">{math}</span>;
           }
-          return <span key={`${idx}-${inlineIdx}`}>{inlinePart}</span>;
+          const linkedText = inlinePart.split(/(\[[^\]]+\]\(https?:\/\/[^\s)]+\))/g).map((textPart, textIdx) => {
+            const link = textPart.match(/^\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)$/);
+            return link
+              ? <a key={textIdx} href={link[2]}>{link[1]}</a>
+              : textPart;
+          });
+          return <span key={`${idx}-${inlineIdx}`}>{linkedText}</span>;
         });
         result.push(...inlineResult);
       }
