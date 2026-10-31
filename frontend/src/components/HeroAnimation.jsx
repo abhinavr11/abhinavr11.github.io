@@ -1,0 +1,99 @@
+import React, { useEffect, useRef } from 'react';
+
+// Crop the empty margins of the original 400 × 400 sketch.
+const WIDTH = 240;
+const HEIGHT = 360;
+const LOOP_DURATION = 160 * 33;
+const FRAME_INTERVAL = 1000 / 30;
+const POINTS = Array.from({ length: 10000 }, (_, index) => {
+  const i = 9999 - index;
+  const y = i / 235;
+  const e = y / 7 - 13;
+  return { phase: i / 9, wave: Math.cos(i / 35), y, e, bend: Math.cos(e) * 9 };
+});
+
+const HeroAnimation = () => {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext('2d');
+    if (!context) return undefined;
+
+    const pixels = context.createImageData(WIDTH, HEIGHT);
+    const counts = new Uint16Array(WIDTH * HEIGHT);
+    const opacity = Uint8Array.from({ length: POINTS.length + 1 }, (_, count) =>
+      Math.round(255 * (1 - (1 - 96 / 255) ** count))
+    );
+    for (let offset = 0; offset < pixels.data.length; offset += 4) {
+      pixels.data[offset] = 255;
+      pixels.data[offset + 1] = 255;
+      pixels.data[offset + 2] = 255;
+    }
+
+    const draw = (t) => {
+      counts.fill(0);
+      for (const { phase, wave, y, e, bend } of POINTS) {
+        const k = (4 + Math.cos(phase - t * 2)) * wave;
+        const d = Math.hypot(k, e) + Math.sin(e / 9 + t / 2) - 4;
+        const q = 2 * Math.sin(k * 3) - y / 35 * k * (9 + k * Math.sin(bend - d * 2 + t));
+        const c = d - t;
+        const x = Math.round(q + 40 * Math.cos(c) + 200) - 80;
+        const py = Math.round(q * Math.sin(c) + d * 35) - 40;
+        if (x >= 0 && x < WIDTH && py >= 0 && py < HEIGHT) {
+          counts[py * WIDTH + x] += 1;
+        }
+      }
+      for (let index = 0; index < counts.length; index += 1) {
+        pixels.data[index * 4 + 3] = opacity[counts[index]];
+      }
+      context.putImageData(pixels, 0, 0);
+    };
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let animationId;
+    let inView = true;
+    let elapsed = 0;
+    let previousTime;
+    let lastDraw = 0;
+
+    const animate = (now) => {
+      if (previousTime !== undefined) elapsed += now - previousTime;
+      previousTime = now;
+      if (now - lastDraw >= FRAME_INTERVAL) {
+        draw(Math.PI / 80 + (elapsed % LOOP_DURATION) / LOOP_DURATION * Math.PI * 4);
+        lastDraw = now;
+      }
+      animationId = window.requestAnimationFrame(animate);
+    };
+
+    const syncPlayback = () => {
+      window.cancelAnimationFrame(animationId);
+      previousTime = undefined;
+      if (!reducedMotion.matches && inView && !document.hidden) {
+        animationId = window.requestAnimationFrame(animate);
+      }
+    };
+
+    draw(Math.PI / 80);
+    const observer = new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      syncPlayback();
+    });
+    observer.observe(canvas);
+    reducedMotion.addEventListener('change', syncPlayback);
+    document.addEventListener('visibilitychange', syncPlayback);
+    syncPlayback();
+
+    return () => {
+      window.cancelAnimationFrame(animationId);
+      observer.disconnect();
+      reducedMotion.removeEventListener('change', syncPlayback);
+      document.removeEventListener('visibilitychange', syncPlayback);
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} className="hero-animation" width={WIDTH} height={HEIGHT} aria-hidden="true" />;
+};
+
+export default HeroAnimation;

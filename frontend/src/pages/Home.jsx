@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Github, Linkedin, GraduationCap, Twitter, ChevronDown, ChevronUp, ExternalLink } from 'lucide-react';
 import { portfolioData } from '../mock';
+import HeroAnimation from '../components/HeroAnimation';
 
 const Home = () => {
   const [expandedPub, setExpandedPub] = useState(null);
@@ -83,6 +84,7 @@ const Home = () => {
               </span>
             </blockquote>
           </div>
+          <HeroAnimation />
         </div>
       </section>
 

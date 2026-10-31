@@ -151,9 +151,18 @@ a {
 }
 
 .hero-content-with-photo {
-  display: flex;
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr) clamp(160px, 20vw, 192px);
   align-items: center;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-md);
+}
+
+.hero-animation {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2 / 3;
+  pointer-events: none;
 }
 
 .hero-photo {
@@ -1295,9 +1304,14 @@ a {
   }
   
   .hero-content-with-photo {
-    flex-direction: column;
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
     align-items: center;
     text-align: center;
+  }
+
+  .hero-animation {
+    width: 144px;
   }
   
   .hero-text {
