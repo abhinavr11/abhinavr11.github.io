@@ -205,9 +205,7 @@ a {
 
 .hero-math-card {
   padding: 1.25rem 1.5rem;
-  border: 1px solid var(--color-border);
   border-radius: 4px;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
 }
 
 .hero-math-equations {
@@ -325,7 +323,6 @@ a {
   width: max-content;
   max-width: min(18rem, 80vw);
   padding: 0.5rem 0.75rem;
-  border: 1px solid var(--color-border);
   border-radius: 4px;
   color: var(--color-text-secondary);
   font-family: 'Cormorant Garamond', serif;
