@@ -157,12 +157,71 @@ a {
   gap: var(--spacing-md);
 }
 
+.hero-animation-container {
+  position: relative;
+  min-width: 0;
+}
+
+.hero-animation-trigger {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-text-tertiary);
+  cursor: help;
+}
+
+.hero-animation-trigger:focus-visible {
+  outline: 1px solid var(--color-text-tertiary);
+  outline-offset: 8px;
+}
+
 .hero-animation {
   display: block;
   width: 100%;
   height: auto;
   aspect-ratio: 2 / 3;
   pointer-events: none;
+}
+
+.hero-math-popover {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 20;
+  width: min(32rem, calc(100vw - 2rem));
+  padding-top: 1rem;
+  text-align: left;
+}
+
+.hero-math-card,
+.hero-quote-meaning {
+  background: rgba(26, 26, 26, 0.22);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.hero-math-card {
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
+}
+
+.hero-math-equations {
+  color: var(--color-text-primary);
+  overflow-x: auto;
+}
+
+.hero-math-equations .katex {
+  font-size: 0.96rem;
+}
+
+.hero-math-equations .katex-display {
+  margin: 0;
+  text-align: left;
 }
 
 .hero-photo {
@@ -268,7 +327,6 @@ a {
   padding: 0.5rem 0.75rem;
   border: 1px solid var(--color-border);
   border-radius: 4px;
-  background: var(--color-bg-secondary);
   color: var(--color-text-secondary);
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
@@ -1310,8 +1368,22 @@ a {
     text-align: center;
   }
 
-  .hero-animation {
+  .hero-animation-container {
     width: 144px;
+  }
+
+  .hero-math-popover {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .hero-math-card {
+    padding: 1rem;
+  }
+
+  .hero-math-equations .katex {
+    font-size: clamp(0.68rem, 2.7vw, 0.96rem);
   }
   
   .hero-text {

@@ -1,4 +1,16 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useId, useRef, useState } from 'react';
+import katex from 'katex';
+import 'katex/dist/katex.min.css';
+
+const EQUATIONS = katex.renderToString(String.raw`\begin{aligned}
+  s &= i/235, \qquad e = s/7 - 13 \\
+  k &= \bigl(4 + \cos(i/9 - 2t)\bigr)\cos(i/35) \\
+  d &= \sqrt{k^2 + e^2} + \sin(e/9 + t/2) - 4 \\
+  q &= 2\sin(3k) - \frac{sk}{35}\bigl[9 \\
+    &\qquad {}+ k\sin\bigl(9\cos(e) - 2d + t\bigr)\bigr] \\
+  x &= q + 40\cos(d-t) + 200 \\
+  y &= q\sin(d-t) + 35d
+\end{aligned}`, { displayMode: true, throwOnError: true });
 
 // Crop the empty margins of the original 400 × 400 sketch.
 const WIDTH = 240;
@@ -14,6 +26,22 @@ const POINTS = Array.from({ length: 10000 }, (_, index) => {
 
 const HeroAnimation = () => {
   const canvasRef = useRef(null);
+  const containerRef = useRef(null);
+  const panelId = useId();
+  const [isOpen, setIsOpen] = useState(false);
+  const [isPinned, setIsPinned] = useState(false);
+
+  useEffect(() => {
+    if (!isOpen) return undefined;
+    const dismissOutside = (event) => {
+      if (!containerRef.current?.contains(event.target)) {
+        setIsOpen(false);
+        setIsPinned(false);
+      }
+    };
+    document.addEventListener('pointerdown', dismissOutside);
+    return () => document.removeEventListener('pointerdown', dismissOutside);
+  }, [isOpen]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -93,7 +121,47 @@ const HeroAnimation = () => {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="hero-animation" width={WIDTH} height={HEIGHT} aria-hidden="true" />;
+  return (
+    <div
+      ref={containerRef}
+      className="hero-animation-container"
+      onMouseEnter={() => setIsOpen(true)}
+      onMouseLeave={() => { if (!isPinned) setIsOpen(false); }}
+      onBlur={(event) => {
+        if (event.relatedTarget && !event.currentTarget.contains(event.relatedTarget)) {
+          setIsOpen(false);
+          setIsPinned(false);
+        }
+      }}
+      onKeyDown={(event) => {
+        if (event.key === 'Escape') {
+          setIsOpen(false);
+          setIsPinned(false);
+          event.stopPropagation();
+        }
+      }}
+    >
+      <button
+        type="button"
+        className="hero-animation-trigger"
+        aria-label="Explore the math behind the animation"
+        aria-expanded={isOpen}
+        aria-controls={panelId}
+        onFocus={() => setIsOpen(true)}
+        onClick={() => {
+          setIsPinned(!isPinned);
+          setIsOpen(!isPinned);
+        }}
+      >
+        <canvas ref={canvasRef} className="hero-animation" width={WIDTH} height={HEIGHT} aria-hidden="true" />
+      </button>
+      <div className="hero-math-popover" id={panelId} hidden={!isOpen}>
+        <section className="hero-math-card" aria-label="Animation equations">
+          <div className="hero-math-equations" dangerouslySetInnerHTML={{ __html: EQUATIONS }} />
+        </section>
+      </div>
+    </div>
+  );
 };
 
 export default HeroAnimation;
