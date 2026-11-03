@@ -171,6 +171,9 @@ const WritingDetail = () => {
             {line.slice(4)}
           </h3>
         );
+      } else if (line.trim() === '---') {
+        flushParagraph();
+        elements.push(<hr key={elements.length} className="article-divider" />);
       } else if (line.trim() === '') {
         flushParagraph();
       } else if (line.startsWith('$$')) {

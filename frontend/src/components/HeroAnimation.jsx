@@ -144,7 +144,7 @@ const HeroAnimation = () => {
       <button
         type="button"
         className="hero-animation-trigger"
-        aria-label="Explore the math behind the animation"
+        aria-label="Explore the math behind Coki"
         aria-expanded={isOpen}
         aria-controls={panelId}
         onFocus={() => setIsOpen(true)}
@@ -156,7 +156,8 @@ const HeroAnimation = () => {
         <canvas ref={canvasRef} className="hero-animation" width={WIDTH} height={HEIGHT} aria-hidden="true" />
       </button>
       <div className="hero-math-popover" id={panelId} hidden={!isOpen}>
-        <section className="hero-math-card" aria-label="Animation equations">
+        <section className="hero-math-card" aria-label="Coki equations">
+          <h2 className="hero-math-title">Coki</h2>
           <div className="hero-math-equations" dangerouslySetInnerHTML={{ __html: EQUATIONS }} />
         </section>
       </div>
