@@ -4,6 +4,6 @@ title: Solving Distributed Robust Model Predictive Control by formulating it as 
 date: November 2026
 excerpt: A convex semi-infinite formulation of distributed robust model predictive control for coupled subsystems.
 readTime: Research Paper
-externalUrl: /solving-distributed-robust-mpc-as-a-csip.pdf
+externalUrl: /Robust_MPC.pdf
 ---
 This note links to the full PDF.
