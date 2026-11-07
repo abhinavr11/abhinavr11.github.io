@@ -823,7 +823,6 @@ a {
 }
 
 .writings-latest-grid {
-  --writing-highlight: #d6bc98;
   grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
 }
 
@@ -858,13 +857,12 @@ a {
 }
 
 .writings-latest-grid .writing-card:hover {
-  background-color: #252320;
-  border-color: var(--writing-highlight);
+  border-color: var(--color-accent);
   transform: none;
 }
 
 .writings-latest-grid .writing-card:focus-visible {
-  outline: 2px solid var(--writing-highlight);
+  outline: 2px solid var(--color-accent);
   outline-offset: 3px;
 }
 
@@ -882,13 +880,13 @@ a {
 
 .writings-latest-grid .writing-card-featured {
   padding: clamp(1.25rem, 3.5vw, 2rem);
-  background-image: radial-gradient(ellipse at top left, rgba(214, 188, 152, 0.15), transparent 80%);
-  border-top-color: rgba(214, 188, 152, 0.55);
+  background-image: radial-gradient(ellipse at top left, var(--color-bg-tertiary), transparent 80%);
+  border-top-color: var(--color-hover);
 }
 
 .writing-card-featured .writing-card-label {
   margin-bottom: var(--spacing-sm);
-  color: var(--writing-highlight);
+  color: var(--color-accent);
 }
 
 .writing-card-featured .writing-title {
