@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Clock, ChevronDown, ChevronUp } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ArrowUpRight, Clock, ChevronDown, ChevronUp } from 'lucide-react';
 import { portfolioData } from '../mock';
 import { loadWritings } from '../lib/writings';
 
-const WritingCard = ({ writing, variant = '' }) => {
+const WritingCard = ({ writing, variant = '', label }) => {
   const className = ['writing-card', variant].filter(Boolean).join(' ');
+  const LinkIcon = writing.externalUrl ? ArrowUpRight : ArrowRight;
   const content = (
     <>
+      {label && (
+        <div className="writing-card-label">
+          <span>{label}</span>
+          <LinkIcon size={18} aria-hidden="true" />
+        </div>
+      )}
       <h3 className="writing-title">{writing.title}</h3>
       <p className="writing-excerpt">{writing.excerpt}</p>
       <div className="writing-meta">
@@ -137,7 +144,7 @@ const Writings = () => {
   }, []);
 
   const { technicalWritings, nonTechnicalWritings, allWritings } = writings;
-  const latestWritings = allWritings.slice(0, 3);
+  const [featuredWriting, ...recentWritings] = allWritings.slice(0, 3);
 
   const toggleSection = (section) => {
     setOpenSections((currentSections) => ({
@@ -183,19 +190,25 @@ const Writings = () => {
         </section>
       )}
 
-      {!isLoading && latestWritings.length > 0 && (
+      {!isLoading && featuredWriting && (
         <section className="content-section writings-latest-section">
           <div className="writings-section-heading">
             <h2 className="section-title">Latest Articles</h2>
           </div>
           <div className="writings-latest-grid">
-            {latestWritings.map((writing, index) => (
-              <WritingCard
-                key={writing.id}
-                writing={writing}
-                variant={index === 0 ? 'writing-card-featured' : 'writing-card-compact'}
-              />
-            ))}
+            <WritingCard writing={featuredWriting} variant="writing-card-featured" label="Featured" />
+            {recentWritings.length > 0 && (
+              <div className="writings-latest-stack">
+                {recentWritings.map((writing) => (
+                  <WritingCard
+                    key={writing.id}
+                    writing={writing}
+                    variant="writing-card-compact"
+                    label={writing.category === 'technical' ? 'Technical' : 'Non-Technical'}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </section>
       )}
